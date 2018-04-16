@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\lib\Db;
+use app\core\Db;
 use app\lib\Users;
 use app\core\Model;
 

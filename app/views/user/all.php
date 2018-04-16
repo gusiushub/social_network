@@ -1,6 +1,7 @@
 <?php
-use app\modules\xddialogs\xddialog;
+
 $users = $vars['model']->allUsers();
+
 ?>
 <div class="container">
     <h2>Пользователи</h2>

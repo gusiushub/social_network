@@ -1,11 +1,12 @@
 <?php
+/**
+ * Класс для работы с пользователями
+ * */
 
 namespace app\lib;
 
 use app\core\View;
-use app\lib\Db;
-use PDO;
-use app\core\DataBase;
+use app\core\Db;
 
 class Users
 {
@@ -22,17 +23,17 @@ class Users
      */
     public function getAllUsers()
     {
-        return $this->db->row("SELECT * FROM users ");
+        return $this->db->queryRows("SELECT * FROM users ");
     }
 
     public function getIdUsers()
     {
-        return $this->db->row("SELECT id FROM users ");
+        return $this->db->queryRows("SELECT id FROM users ");
     }
 
     public function getLoginUsers()
     {
-        return $this->db->row("SELECT login FROM users ");
+        return $this->db->queryRows("SELECT login FROM users ");
     }
 
     /**
@@ -45,30 +46,22 @@ class Users
 
     public function login()
     {
-        $data = new DataBase;
-        $params = [
-            ':login' => $_POST['login']
-        ];
-        $sql = 'SELECT * FROM users WHERE login = :login';
-        $user = $data->prepare($sql,$params);
-        if($user[0]['password']==null and $user[0]['password']==''){
-            echo 'Не верный пароль';
-        }elseif ($user[0]['password'] == $_POST['password'] ){
-            $this->setUserSession($user);
-            $this->activeStatus();
-            View::redirect('/user/'.$_SESSION['id']);
-            return true;
+        $user = $this->db->queryRow('SELECT * FROM users WHERE login = :login', array(':login' => $_POST['login']));
+        if(!empty($user)){
+            if($user['password']==null and $user['password']==''){
+                echo 'Не верный пароль';
+            }elseif ($user['password'] == $_POST['password'] ){
+                $this->setUserSession($user);
+                $this->activeStatus();
+                View::redirect('/user/'.$_SESSION['id']);
+                return true;
+            }
         }
     }
 
     public function activeStatus()
     {
-        $db = new PDO('mysql:host=localhost;dbname=network','root','');
-        $sql ='UPDATE users SET active=:active WHERE id=:id';
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
-        $stmt->bindParam(':active', $_SESSION['active'], PDO::PARAM_INT);
-        $stmt->execute();
+        $this->db->update('users', array('active' => $_SESSION['active']), 'id=:id', array(':id' => $_SESSION['id']));
     }
 
     /**
@@ -76,30 +69,25 @@ class Users
      */
     protected function setUserSession($user)
     {
-        $_SESSION['id']=$user[0]['id'];
-        $_SESSION['first_name']=$user[0]['first_name'];
-        $_SESSION['login']=$user[0]['login'];
+        $_SESSION['id']=$user['id'];
+        $_SESSION['first_name']=$user['first_name'];
+        $_SESSION['login']=$user['login'];
         $_SESSION['active']=1;
     }
 
     protected function findUser()
     {
-        //
+
     }
 
     protected function addFriend()
     {
-        //
+        return ;
     }
 
     public function getActiveStatus()
     {
-        $data = new DataBase;
-        $params = [
-            ':id' => $_GET['id']
-        ];
-        $sql = 'SELECT active FROM users WHERE id=:id';
-        $status = $data->prepare($sql, $params);
-        return $status[0]['active'];
+        $status = $this->db->queryRow('SELECT active FROM users WHERE id=:id', array(':id' => $_GET['id']));
+        return $status['active'];
     }
 }

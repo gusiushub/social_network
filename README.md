@@ -33,8 +33,27 @@ Directory Structure
 >_runtime/_  - contains files generated during runtime <br>
 
 **PHP-MVC is an MVC framework written for PHP 5.6. It is in very early development (it's being written
- alongside a web application) but is hoped to develop into a full framework in the process of creating
-  said web app. Because of this it's wise to take the framework with a pinch of salt - nearly all the
-   classes are documented and most of the core components work properly but there will only be as much
-    documentation as is necessary to configure the framework. A sample full version app is coming soon.
-    Now it's a social network that is in development**
+alongside a web application) but is hoped to develop into a full framework in the process of creating
+said web app. Because of this it's wise to take the framework with a pinch of salt - nearly all the
+classes are documented and most of the core components work properly but there will only be as much
+documentation as is necessary to configure the framework. A sample full version app is coming soon.
+Now it's a social network that is in development**
+
+Example of working with the database
+-------------------------------------
+    $db = new Db();
+    
+    // Выборка одного значения
+    $count = $db->queryValue('SELECT COUNT(*) FROM users');
+    
+    // Выборка набора записей
+    $users = $db->queryRows('SELECT * FROM users WHERE name LIKE ?', array('%username%'));
+    
+    // Выборка одной записи
+    $user = $db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => 123));
+    
+    // Добавление записи (INSERT) и получение значения поля AUTO_INCREMENT
+    $newUserId = $db->insert('users', array('name' => 'NewUserName', 'password' => 'zzxxcc'));
+    
+    // Изменение записи (UPDATE)
+    $db->update('users', array('name' => 'UpdatedName'), 'id=:id', array(':id' => $newUserId));

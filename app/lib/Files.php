@@ -3,7 +3,7 @@
 
 namespace app\lib;
 
-use app\lib\Db;
+use app\core\Db;
 
 class Files
 {

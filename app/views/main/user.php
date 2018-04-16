@@ -23,7 +23,7 @@ if (isset($_POST['avatarLoad'])){
             <div class="col-md-3">
                 <div class="about-fixed">
                     <div class="my-pic">
-                        <img height="350px" src="../../../public/avatars/<?php echo $user[0]['avatar'] ?>" alt="">
+                        <img height="350px" src="../../../public/avatars/<?php echo $user['avatar'] ?>" alt="">
                         <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
                         <div id="menu" class="collapse">
                             <ul class="menu-link">
@@ -40,7 +40,7 @@ if (isset($_POST['avatarLoad'])){
                             <?php } else { ?>
                             <small>Offline</small>
                             <?php } ?>
-                            <h1><?php echo $user[0]['first_name'].' '.$user[0]['last_name'] ?></h1>
+                            <h1><?php echo $user['first_name'].' '.$user['last_name'] ?></h1>
                             <?php if($_SESSION['id']!=$_GET['id']) { ?>
                             <button href="#" class="btn btn-primary">Написать</button>
                             <button href="#" class="btn btn-primary">Подписаться</button>
@@ -93,13 +93,12 @@ if (isset($_POST['avatarLoad'])){
                         <div class="col-md-12 content-page">
                             <?php foreach($vars['model']->userPosts() as $var){ ?>
                             <!-- Blog Post Start -->
-
                             <div class="col-md-12 blog-post">
                                 <div class="post-title">
                                     <a href="single.html"><h1><?php echo $var['title']; ?></h1></a>
                                 </div>
                                 <div class="post-info">
-                                    <span><?php echo $var['date']; ?>/ by <a href="#" target="_blank"><?php echo $user[0]['first_name'].' '.$user[0]['last_name'] ?></a></span>
+                                    <span><?php echo $var['date']; ?>/ by <a href="#" target="_blank"><?php echo $user['first_name'].' '.$user['last_name'] ?></a></span>
                                 </div>
                                 <p class="text-center" ><?php echo $var['content']; ?></p>
                                 <a href="single.html" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>

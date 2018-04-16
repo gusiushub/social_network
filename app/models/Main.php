@@ -4,19 +4,16 @@ namespace app\models;
 
 use app\core\Model;
 use app\core\View;
-use app\lib\Db;
+use app\core\Db;
 use app\lib\Files;
 use app\lib\Form;
 use app\lib\Users;
-use app\core\DataBase;
-use PDO;
 
 class Main extends Model
 {
     private $user;
     private $file;
     private $form;
-    private $connect;
 
     public function __construct()
     {
@@ -24,7 +21,6 @@ class Main extends Model
         $this->user = new Users;
         $this->file = new Files;
         $this->form = new Form;
-        $this->connect = new DataBase;
     }
 
     /**
@@ -32,11 +28,7 @@ class Main extends Model
      */
     public function userId()
     {
-        $sql = 'SELECT * FROM users WHERE id=:id';
-        $params = [
-            ':id' => $_GET['id']
-        ];
-        return $this->connect->prepare($sql,$params);
+        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $_GET['id']));
     }
 
     /**
@@ -71,63 +63,38 @@ class Main extends Model
 
     public function updateAvatar($filename)
     {
-        $params = [
-            ':id' => $_SESSION['id']
-        ];
-        $sql = "UPDATE users SET avatar='".$filename."' WHERE id=:id";
-        return $this->connect->prepare($sql,$params);
+        return $this->db->update('users', array('avatar' => $filename), 'id=:id', array(':id' => $_SESSION['id']));
     }
 
     public function userPosts()
     {
-        $sql = "SELECT * FROM posts WHERE user_id=:id ORDER BY id DESC";
-        $params = [
-            ':id' => $_GET['id']
-        ];
-        return $this->connect->prepare($sql, $params);
+        return $this->db->queryRows('SELECT * FROM posts WHERE user_id=:id
+                                            ORDER BY id DESC', array('id' => $_GET['id']));
     }
 
     public function post()
     {
         if (!empty($_POST['title']) && !empty($_POST['content'])) {
-            $sql = "INSERT INTO posts (title, content, date, user_id) VALUES (:title,:content,:date, :user_id)";
-            $params = [
-                ':title'   => $_POST['title'] ,
-                ':content' => $_POST['content'],
-                ':date'    => date('Y-m-d',time()),
-                ':user_id' => $_SESSION['id']
-            ];
-            return $this->connect->prepare($sql,$params);
+            return $this->db->insert('posts', array(  'title' => $_POST['title'],
+                                                            'content' => $_POST['content'],
+                                                            'date' => date('Y-m-d',time()),
+                                                            'user_id' => $_SESSION['id']));
         }
         echo 'заполните все поля поля';
     }
 
     public function signUp()
     {
-        try
-        {
-            $db = new PDO('mysql:host=localhost;dbname=network','root','');
-            $sql = "INSERT INTO users (first_name, last_name, email, login, password) VALUES (?, ?, ?, ?, ?)";
-            $params = array(
-                $_POST['first_name'],
-                $_POST['last_name'],
-                $_POST['E-mail'],
-                $_POST['login'],
-                $_POST['password']
-            );
-            $result = $db->prepare($sql);
-
-            if ($this->checkRegisterForm()) {
-                View::redirect('/');
-                return $q = $result->execute($params);
-            }
-            else {
-                echo 'Пользователь с e-mail '.$_POST['E-mail'].'уже существует';
-            }
+        if ($this->checkRegisterForm()) {
+            View::redirect('/');
+            return $this->db->insert('users', array(   'first_name' => $_POST['first_name'],
+                                                            'last_name' =>$_POST['last_name'],
+                                                            'E-mail'=>$_POST['E-mail'],
+                                                            'login' =>$_POST['login'],
+                                                            'password' => $_POST['password']));
         }
-        catch(PDOException $e)
-        {
-            die("Error: ".$e->getMessage());
+        else {
+            echo 'Пользователь с e-mail '.$_POST['E-mail'].'уже существует';
         }
     }
 

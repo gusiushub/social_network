@@ -6,14 +6,11 @@
  * Time: 2:43
  */
 
-/**
- * временный файл для включения
- * ошибок на время разработки
- */
-require 'app/lib/Dev.php';
+require_once '/app/lib/Dev.php';
+require_once '/app/composer/vendor/autoload.php';
 
 use app\core\Router;
-use app\lib\Db;
+use app\core\Db;
 
 // функция автозагрузки классов
 spl_autoload_register(function ($class) {
