@@ -2,9 +2,7 @@
 
 namespace app\controllers;
 
-
 use app\core\Controller;
-use app\core\Db;
 use app\models\Main;
 
 class MainController extends Controller
@@ -27,7 +25,7 @@ class MainController extends Controller
     {
         $model = new Main;
         $vars = ['model' => $model];
-        $this->view->render('Профиль',$vars);
+        $this->view->render('Профиль', $vars);
     }
 
     public function allAction()

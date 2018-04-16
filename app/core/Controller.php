@@ -2,16 +2,16 @@
 
 namespace app\core;
 
-use app\core\View;
-
 abstract class Controller
 {
     public $route;
     public $view;
     public $acl;
+    public $model;
 
     public function __construct($route)
     {
+        //$this->model = new Main;
         $this->route = $route;
         if(!$this->checkAcl()){
             View::errorCode(403);

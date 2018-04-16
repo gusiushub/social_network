@@ -7,7 +7,7 @@ use app\core\Db;
 
 class Files
 {
-    public $db;
+    private $db;
 
     public function __construct()
     {
@@ -45,5 +45,10 @@ class Files
         } else {
             echo "Ошибка: файл не загружен!";
         }
+    }
+
+    public function updateAvatar($filename)
+    {
+        return $this->db->update('users', array('avatar' => $filename), 'id=:id', array(':id' => $_SESSION['id']));
     }
 }

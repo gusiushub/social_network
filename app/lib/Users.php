@@ -11,11 +11,18 @@ use app\core\Db;
 class Users
 {
 
-    public $db;
+    private $db;
+    private $form;
 
     public function __construct()
     {
-        $this->db = new Db;
+        $this->db   = new Db;
+        $this->form = new Form;
+    }
+
+    public function userId()
+    {
+        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $_GET['id']));
     }
 
     /**
@@ -36,19 +43,32 @@ class Users
         return $this->db->queryRows("SELECT login FROM users ");
     }
 
-    /**
-     * @return array имя и фамилия пользователя
-     */
-    public function getNameUsers()
+    public function signUp()
     {
-        return $this->db->row("SELECT first_name, last_name FROM users ");
+        if ($this->checkRegisterForm()) {
+            View::redirect('/');
+            return $this->db->insert('users', array(   'first_name' => $_POST['first_name'],
+                'last_name' =>$_POST['last_name'],
+                'E-mail'=>$_POST['E-mail'],
+                'login' =>$_POST['login'],
+                'password' => $_POST['password']));
+        }
+        else {
+            echo 'Пользователь с e-mail '.$_POST['E-mail'].'уже существует';
+        }
     }
+
+    protected function checkRegisterForm()
+    {
+        return $this->form->regValidate();
+    }
+
 
     public function login()
     {
         $user = $this->db->queryRow('SELECT * FROM users WHERE login = :login', array(':login' => $_POST['login']));
         if(!empty($user)){
-            if($user['password']==null and $user['password']==''){
+            if($user['password'] == null and $user['password']==''){
                 echo 'Не верный пароль';
             }elseif ($user['password'] == $_POST['password'] ){
                 $this->setUserSession($user);
@@ -59,7 +79,7 @@ class Users
         }
     }
 
-    public function activeStatus()
+    protected function activeStatus()
     {
         $this->db->update('users', array('active' => $_SESSION['active']), 'id=:id', array(':id' => $_SESSION['id']));
     }
@@ -75,14 +95,19 @@ class Users
         $_SESSION['active']=1;
     }
 
-    protected function findUser()
+    public function addFriend()
     {
-
+        return $this->db->insert('friends', array('user_id' => $_SESSION['id'], 'friend_id' => $_GET['id']));
     }
 
-    protected function addFriend()
+    public function getFriends()
     {
-        return ;
+        return $this->db->queryRows('SELECT * FROM friends WHERE user_id='.$_GET['id']);
+    }
+
+    public function findFriend()
+    {
+        return $this->db->queryRow('SELECT friend_id FROM friends WHERE friend_id='.$_GET['id']);
     }
 
     public function getActiveStatus()
@@ -90,4 +115,33 @@ class Users
         $status = $this->db->queryRow('SELECT active FROM users WHERE id=:id', array(':id' => $_GET['id']));
         return $status['active'];
     }
+
+    public function countFriends()
+    {
+        return count($this->getFriends());
+    }
+
+    public function getSubscribers()
+    {
+        return $this->db->queryRows('SELECT * FROM friends WHERE friend_id='.$_GET['id']);
+    }
+
+    public function countSubscribers()
+    {
+        return count($this->getSubscribers());
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['first_name']);
+        unset($_SESSION['login']);
+        unset($_SESSION['avatar']);
+        $_SESSION['active']=0;
+        $this->activeStatus();
+        unset($_SESSION['id']);
+        View::redirect('/');
+    }
+
+
+
 }

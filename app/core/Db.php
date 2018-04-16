@@ -8,17 +8,11 @@ class Db
 {
     private $db;
 
-    /**
-     * Db constructor.
-     * @param $db
-     */
+
     public function __construct()
     {
-        $config = require '/../config/db.php';
-
+        $config   = require '/../config/db.php';
         $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['db_name'].'', $config['username'], $config['password']);
-
-        //$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
@@ -30,27 +24,27 @@ class Db
     public function insert($table, $fields, $insertParams = null)
     {
         try {
-            $result = null;
-            $names = '';
-            $vals = '';
-            foreach ($fields as $name => $val) {
-                if (isset($names[0])) {
-                    $names .= ', ';
-                    $vals .= ', ';
+                $result = null;
+                $names  = '';
+                $vals   = '';
+                foreach ($fields as $name => $val) {
+                    if (isset($names[0])) {
+                        $names .= ', ';
+                        $vals .= ', ';
+                    }
+                    $names .= $name;
+                    $vals .= ':' . $name;
                 }
-                $names .= $name;
-                $vals .= ':' . $name;
-            }
-            $ignore = isset($insertParams['ignore']) && $insertParams['ignore']? 'IGNORE': '';
-            $sql = "INSERT $ignore INTO " . $table . ' (' . $names . ') VALUES (' . $vals . ')';
-            $rs = $this->db->prepare($sql);
-            foreach ($fields as $name => $val) {
-                $rs->bindValue(':' . $name, $val);
-            }
-            if ($rs->execute()) {
-                $result = $this->db->lastInsertId(null);
-            }
-            return $result;
+                $ignore = isset($insertParams['ignore']) && $insertParams['ignore']? 'IGNORE': '';
+                $sql = "INSERT $ignore INTO " . $table . ' (' . $names . ') VALUES (' . $vals . ')';
+                $rs = $this->db->prepare($sql);
+                foreach ($fields as $name => $val) {
+                    $rs->bindValue(':' . $name, $val);
+                }
+                if ($rs->execute()) {
+                    $result = $this->db->lastInsertId(null);
+                }
+                return $result;
         } catch(Exception $e) {
             $this->report($e);
         }
@@ -173,7 +167,7 @@ class Db
     {
         try {
             $result = null;
-            $stmt = $this->db->prepare($query);
+            $stmt   = $this->db->prepare($query);
             if($classname) {
                 $stmt->setFetchMode($fetchStyle, $classname);
             } else {

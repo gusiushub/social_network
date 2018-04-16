@@ -15,6 +15,12 @@ if (isset($_POST['avatarLoad'])){
     $vars['model']->updateAvatar($upload);
     View::redirect('/user/'.$_SESSION['id']);
 }
+if(isset($_POST['addFriend'])){
+    if ($vars['model']->findFriend()==FALSE){
+        $vars['model']->addFriend();
+        View::redirect('/user/'.$_GET['id']);
+    }
+}
 ?>
 <div id="main">
     <div class="container">
@@ -42,8 +48,10 @@ if (isset($_POST['avatarLoad'])){
                             <?php } ?>
                             <h1><?php echo $user['first_name'].' '.$user['last_name'] ?></h1>
                             <?php if($_SESSION['id']!=$_GET['id']) { ?>
-                            <button href="#" class="btn btn-primary">Написать</button>
-                            <button href="#" class="btn btn-primary">Подписаться</button>
+                           <form method="post">
+                               <input type="submit" href="#" name="sms" class="btn btn-primary" value="Написать">
+                               <input type="submit" href="#" name="addFriend" class="btn btn-primary" value="Подписаться">
+                           </form>
                             <?php } ?>
                             <?php if($_SESSION['id']==$_GET['id']) { ?>
                             <div class="btn-group">
@@ -59,9 +67,8 @@ if (isset($_POST['avatarLoad'])){
                                 </ul>
                             </div>
                         <?php } ?>
-                                <br><small><a href="#">Подписчики</a> </small> (5)
-                                <br><small><a href="#">Подписки</a> </small> (5)
-
+                                <br><small><a href="#">Подписчики</a> </small> (<?php echo $vars['model']->countSubscribers(); ?>)
+                                <br><small><a href="#">Подписки</a> </small> (<?php echo $vars['model']->countFriends(); ?>)
                         </div>
                         <ul class="social-icon">
                             <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
