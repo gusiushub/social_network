@@ -50,7 +50,9 @@ if(isset($_POST['addFriend'])){
                             <?php if($_SESSION['id']!=$_GET['id']) { ?>
                            <form method="post">
                                <input type="submit" href="#" name="sms" class="btn btn-primary" value="Написать">
+                               <?php if($vars['model']->findFriend()==FALSE){ ?>
                                <input type="submit" href="#" name="addFriend" class="btn btn-primary" value="Подписаться">
+                               <?php } ?>
                            </form>
                             <?php } ?>
                             <?php if($_SESSION['id']==$_GET['id']) { ?>
@@ -67,8 +69,8 @@ if(isset($_POST['addFriend'])){
                                 </ul>
                             </div>
                         <?php } ?>
-                                <br><small><a href="#">Подписчики</a> </small> (<?php echo $vars['model']->countSubscribers(); ?>)
-                                <br><small><a href="#">Подписки</a> </small> (<?php echo $vars['model']->countFriends(); ?>)
+                                <br><small><a href="/subscribers/<?php echo $_GET['id']; ?>" >Подписчики</a> </small> (<?php echo $vars['model']->countSubscribers(); ?>)
+                                <br><small><a href="/subscriptions/<?php echo $_GET['id']; ?>">Подписки</a> </small> (<?php echo $vars['model']->countFriends(); ?>)
                         </div>
                         <ul class="social-icon">
                             <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>

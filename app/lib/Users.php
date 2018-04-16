@@ -126,6 +126,16 @@ class Users
         return $this->db->queryRows('SELECT * FROM friends WHERE friend_id='.$_GET['id']);
     }
 
+    public function getSubscriptions()
+    {
+        return $this->db->queryRows('SELECT * FROM friends WHERE user_id='.$_GET['id']);
+    }
+
+    public function Subscribers($id)
+    {
+        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $id));
+    }
+
     public function countSubscribers()
     {
         return count($this->getSubscribers());

@@ -110,4 +110,13 @@ class Main extends Model
         return count($this->user->getSubscribers());
     }
 
+    public function Subscribers($id)
+    {
+        return $this->user->Subscribers($id);
+    }
+    public function getSubscriptions()
+    {
+        return $this->user->getSubscriptions();
+    }
+
 }

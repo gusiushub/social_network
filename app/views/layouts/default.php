@@ -38,9 +38,9 @@
     <?php if(isset($_SESSION['id']) && isset($_SESSION['login'])){ ?>
     <li><a href="/user/<?php echo $_SESSION['id'] ?>">Профиль [<?php echo $_SESSION['login']; ?>]</a></li>
     <li><a href="about.html">Сообщения</a></li>
-    <li><a href="about.html">Подписчики</a></li>
-    <li><a href="about.html">Подписки</a></li>
-    <li><a href="all">Пользователи</a></li>
+    <li><a href="/subscribers/<?php echo $_GET['id']; ?>">Подписчики</a></li>
+    <li><a href="/subscriptions/<?php echo $_GET['id']; ?>">Подписки</a></li>
+    <li><a href="/user/all">Пользователи</a></li>
     <?php } ?>
     <?php if(empty($_SESSION['id']) && empty($_SESSION['login'])){ ?>
         <li><a href="work.html">Регистрация</a></li>
@@ -68,9 +68,6 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
         <p>© Copyright 2018. All rights reserved</p>
-        <!-- UiPasta Credit Start -->
-        <div class="uipasta-credit">Design By <a href="http://www.uipasta.com" target="_blank">UiPasta</a></div>
-        <!-- UiPasta Credit End -->
     </footer>
 </div>
 <?php } ?>

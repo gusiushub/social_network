@@ -8,6 +8,16 @@ return [
         'action' => 'index',
     ],
 
+    'subscriptions/[0-9]+' => [
+        'controller' => 'main',
+        'action' => 'subscriptions',
+    ],
+
+    'subscribers/[0-9]+' => [
+        'controller' => 'main',
+        'action' => 'subscribers',
+    ],
+
     'user/[0-9]+' => [
         'controller' => 'main',
         'action' => 'user',

@@ -14,7 +14,6 @@ $users = $vars['model']->allUsers();
                     <h5 class="mt-0"><a href="<?php echo $user['id']; ?>"><?php echo $user['last_name'].' '.$user['first_name'] ;?></a></h5>
                     <button  class="btn btn-primary"><a href="<?php echo $user['id']; ?>">Профиль</a> </button>
                     <button  class="btn btn-primary"><a href="<?php echo $user['id']; ?>">Написать</a> </button>
-                    <button  class="btn btn-primary"><a href="<?php echo $user['id']; ?>">Подписаться</a> </button>
                 </div>
             </div>
         </li>

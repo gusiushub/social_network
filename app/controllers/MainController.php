@@ -28,9 +28,18 @@ class MainController extends Controller
         $this->view->render('Профиль', $vars);
     }
 
-    public function allAction()
+    public function subscriptionsAction()
     {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('Подписки', $vars);
+    }
 
+    public function subscribersAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('подписчики', $vars);
     }
 
     public function logoutAction()

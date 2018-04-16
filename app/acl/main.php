@@ -5,7 +5,9 @@ return [
         'index',
         'register',
         'user',
-        'logout'
+        'logout',
+        'subscribers',
+        'subscriptions'
     ],
     'authorize' => [
 
