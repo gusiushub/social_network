@@ -9,9 +9,12 @@ abstract class Controller
     public $acl;
     public $model;
 
+    /**
+     * Controller constructor.
+     * @param $route
+     */
     public function __construct($route)
     {
-        //$this->model = new Main;
         $this->route = $route;
         if(!$this->checkAcl()){
             View::errorCode(403);
@@ -20,6 +23,10 @@ abstract class Controller
         $this->model = $this->loadModel($route['controller']);
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function loadModel($name)
     {
         $path = 'app\models\\'.ucfirst($name);
@@ -28,6 +35,9 @@ abstract class Controller
         }
     }
 
+    /**
+     * @return bool
+     */
     public function checkAcl()
     {
         $this->acl = require 'app/acl/'.$this->route['controller'].'.php';
@@ -46,6 +56,10 @@ abstract class Controller
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function isAcl($key)
     {
         return in_array($this->route['action'],$this->acl[$key]);

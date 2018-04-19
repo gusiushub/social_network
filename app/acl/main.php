@@ -2,18 +2,18 @@
 
 return [
     'all' => [
-        'index',
-        'register',
+        'subscribers',
+        'subscriptions',
         'user',
         'logout',
-        'subscribers',
-        'subscriptions'
+        'dialog'
     ],
     'authorize' => [
-
+        //
     ],
     'guest' => [
-        //
+        'index',
+        'register'
     ],
     'admin' => [
         //

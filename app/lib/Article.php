@@ -13,9 +13,12 @@ class Article
         $this->db = new Db;
     }
 
+    /**
+     * @return null
+     */
     public function post()
     {
-        if (!empty($_POST['title']) && !empty($_POST['content'])) {
+        if (isset($_POST['title'], $_POST['content'])) {
             return $this->db->insert('posts', array(  'title' => $_POST['title'],
                 'content' => $_POST['content'],
                 'date' => date('Y-m-d',time()),
@@ -26,9 +29,12 @@ class Article
 
     public function deleteArticle($id)
     {
-        return $this->db->execute('DELETE FROM posts WHERE id='.$id);
+        //
     }
 
+    /**
+     * @return null
+     */
     public function userPosts()
     {
         return $this->db->queryRows('SELECT * FROM posts WHERE user_id=:id

@@ -6,7 +6,7 @@ $users = $vars['model']->allUsers();
 <div class="container">
     <h2>Пользователи</h2>
     <ul>
-        <?php foreach ($users as $user){ ?>
+        <?php foreach ($users as $user) { ?>
         <li>
             <div class="media">
                 <img width="64px" class="mr-3" src="../../../public/avatars/<?php echo $user['avatar'] ?>" alt="avatar image">

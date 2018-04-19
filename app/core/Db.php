@@ -9,6 +9,9 @@ class Db
     private $db;
 
 
+    /**
+     * Db constructor.
+     */
     public function __construct()
     {
         $config   = require '/../config/db.php';
@@ -36,7 +39,7 @@ class Db
                     $vals .= ':' . $name;
                 }
                 $ignore = isset($insertParams['ignore']) && $insertParams['ignore']? 'IGNORE': '';
-                $sql = "INSERT $ignore INTO " . $table . ' (' . $names . ') VALUES (' . $vals . ')';
+                $sql = "INSERT ".$ignore." INTO " . $table . ' (' . $names . ') VALUES (' . $vals . ')';
                 $rs = $this->db->prepare($sql);
                 foreach ($fields as $name => $val) {
                     $rs->bindValue(':' . $name, $val);

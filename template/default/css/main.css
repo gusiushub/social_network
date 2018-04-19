@@ -1,0 +1,14 @@
+.forma{
+    width: 400px;
+    margin: 50px auto;
+}
+.fileForm{
+    position: relative;
+    height: 32px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: sans-serif;
+    line-height: 1.42857143;
+    color: #555;
+}

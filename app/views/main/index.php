@@ -1,10 +1,10 @@
 <?php
-if(isset($_POST['loginSubmit'])){
-     $login = $vars['model']->login();
-     if($login){
-         echo 'вы авторизованы';
-     }
-}
+    if(isset($_POST['loginSubmit'])){
+         $login = $vars['model']->login();
+         if($login){
+             echo 'вы авторизованы';
+         }
+    }
 ?>
 <div id="main">
     <div class="container">

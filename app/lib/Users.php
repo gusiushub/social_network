@@ -10,7 +10,6 @@ use app\core\Db;
 
 class Users
 {
-
     private $db;
     private $form;
 
@@ -20,9 +19,14 @@ class Users
         $this->form = new Form;
     }
 
-    public function userId()
+    public function userId($id)
     {
-        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $_GET['id']));
+        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $id));
+    }
+
+    public function useId($id)
+    {
+        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $id));
     }
 
     /**
@@ -63,6 +67,10 @@ class Users
         return $this->form->regValidate();
     }
 
+    public function select($id)
+    {
+        return $this->db->queryRows('SELECT first_name FROM users WHERE id ='.$id);
+    }
 
     public function login()
     {
@@ -126,14 +134,14 @@ class Users
         return $this->db->queryRows('SELECT * FROM friends WHERE friend_id='.$_GET['id']);
     }
 
-    public function getSubscriptions()
+    public function getSubscriptions($id)
     {
-        return $this->db->queryRows('SELECT * FROM friends WHERE user_id='.$_GET['id']);
+        return $this->db->queryRows('SELECT * FROM friends WHERE user_id='.$id);
     }
 
     public function Subscribers($id)
     {
-        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $id));
+        return $this->db->queryRow("SELECT * FROM users WHERE id='".$id."'");
     }
 
     public function countSubscribers()
@@ -151,7 +159,5 @@ class Users
         unset($_SESSION['id']);
         View::redirect('/');
     }
-
-
 
 }

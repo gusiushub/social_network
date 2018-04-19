@@ -14,6 +14,13 @@ class MainController extends Controller
         $this->view->render('Авторизация', $vars);
     }
 
+    public function dialogAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('Диалоги', $vars);
+    }
+
     public function registerAction()
     {
         $model = new Main;

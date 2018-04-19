@@ -14,10 +14,12 @@ Directory Structure
 >> _config/_  - contains application configurations<br>
 >> _controllers/_    -    contains Web controller classes<br>
 >>_core/_<br>
+>>_assets/_<br>
+>>_cache/_<br>
 >>_acl/_<br>
 >>_modules/_<br>
 >>_widgets/_<br>
->>_consol/_<br>
+>>_console/_<br>
  >>_lib_/<br>
 >>_models/_  -   contains model classes<br>
 >>_views/_   -  contains view files for the Web application<br>
@@ -57,3 +59,7 @@ Example of working with the database
     
     // Изменение записи (UPDATE)
     $db->update('users', array('name' => 'UpdatedName'), 'id=:id', array(':id' => $newUserId));
+Front end
+----------    
+**Css files and javascript are connected to the app \ assets directory by a separate class for each layout.
+html css and javascript files are stored in the template folder**

@@ -58,7 +58,7 @@ if(isset($_POST['addFriend'])){
                             <?php if($_SESSION['id']==$_GET['id']) { ?>
                             <div class="btn-group">
                                 <a class="btn dropdown-toggle" style="float: left" data-toggle="dropdown" href="#">
-                                    Кнопка
+                                    Редактировать профиль
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">

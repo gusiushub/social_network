@@ -8,6 +8,11 @@ return [
         'action' => 'index',
     ],
 
+    'dialog' => [
+        'controller' => 'main',
+        'action' => 'dialog',
+    ],
+
     'subscriptions/[0-9]+' => [
         'controller' => 'main',
         'action' => 'subscriptions',

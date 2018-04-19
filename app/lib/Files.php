@@ -14,6 +14,9 @@ class Files
         $this->db = new Db;
     }
 
+    /**
+     * @return string
+     */
     public function upLoad()
     {
         // проверяем, что есть файл
@@ -47,6 +50,10 @@ class Files
         }
     }
 
+    /**
+     * @param $filename
+     * @return mixed
+     */
     public function updateAvatar($filename)
     {
         return $this->db->update('users', array('avatar' => $filename), 'id=:id', array(':id' => $_SESSION['id']));
