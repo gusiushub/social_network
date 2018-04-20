@@ -21,6 +21,13 @@ class MainController extends Controller
         $this->view->render('Диалоги', $vars);
     }
 
+    public function chatAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('Диалоги', $vars);
+    }
+
     public function registerAction()
     {
         $model = new Main;
@@ -49,9 +56,24 @@ class MainController extends Controller
         $this->view->render('подписчики', $vars);
     }
 
+    public function editAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('Ред. профиль', $vars);
+    }
+
     public function logoutAction()
     {
         $model = new Main;
         $model->logout();
     }
+
+    public function allAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('Ред. профиль', $vars);
+    }
+
 }

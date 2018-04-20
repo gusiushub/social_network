@@ -8,9 +8,19 @@ return [
         'action' => 'index',
     ],
 
+    'edit' => [
+        'controller' => 'main',
+        'action' => 'edit',
+    ],
+
     'dialog' => [
         'controller' => 'main',
         'action' => 'dialog',
+    ],
+
+    'dialog/[0-9]+' => [
+        'controller' => 'main',
+        'action' => 'chat',
     ],
 
     'subscriptions/[0-9]+' => [
@@ -38,15 +48,11 @@ return [
       'action' => 'logout',
     ],
 
-    'user/all' => [
-        'controller' => 'user',
+    'all' => [
+        'controller' => 'main',
         'action' => 'all',
     ],
 
-    'user/chat' => [
-        'controller' => 'user',
-        'action' => 'chat',
-    ],
 
 
 ];

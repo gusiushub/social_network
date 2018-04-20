@@ -1,6 +1,9 @@
 <?php $userId = $vars['model']->getSubscriptions($_GET['id']); ?>
 <div class="container">
     <h2>Подписки</h2><br>
+    <?php if(empty($userId)){ ?>
+        <h3>Вы ни на кого не подписаны...</h3>
+    <?php } ?>
     <ul>
         <?php foreach ($userId as $users){ $user = $vars['model']->Subscribers($users['friend_id']); ?>
             <li>

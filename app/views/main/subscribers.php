@@ -1,6 +1,9 @@
 <?php $userId = $vars['model']->getSubscribers(); ?>
 <div class="container">
     <h2>Подписчики</h2>
+    <?php if(empty($userId)){ ?>
+    <h3>У вас нет подписчиков...</h3>
+    <?php } ?>
     <ul>
         <?php foreach ($userId as $users) { $user = $vars['model']->Subscribers($users['user_id']); ?>
             <li>

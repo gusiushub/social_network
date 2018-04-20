@@ -6,7 +6,10 @@ return [
         'subscriptions',
         'user',
         'logout',
-        'dialog'
+        'dialog',
+        'chat',
+        'edit',
+        'all'
     ],
     'authorize' => [
         //

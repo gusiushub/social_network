@@ -1,4 +1,8 @@
 <?php
+/**
+ * Класс для работы с бд
+ * Используется технология PDO
+ */
 
 namespace app\core;
 
@@ -15,12 +19,16 @@ class Db
     public function __construct()
     {
         $config   = require '/../config/db.php';
-        $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['db_name'].'', $config['username'], $config['password']);
+        $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['db_name'],
+                                                                         $config['username'],
+                                                                         $config['password']);
+        $this->db->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND,'SET NAMES utf8');
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
-     * @param $table
-     * @param $fields
+     * @param $table название таблицы
+     * @param $fields название поля
      * @param null $insertParams
      * @return null
      */
@@ -88,6 +96,11 @@ class Db
         } catch(Exception $e) {
             $this->report($e);
         }
+    }
+
+    public function delete($table, $param)
+    {
+        $this->db->exec("DELETE FROM ".$table." WHERE id=".$param);
     }
 
     /**

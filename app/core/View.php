@@ -1,4 +1,8 @@
 <?php
+/**
+ * Файл View.php(файл видов)
+ * Одина из основных частей структуры MVC
+ */
 
 namespace app\core;
 
@@ -6,6 +10,11 @@ class View
 {
     public $path;
     public $route;
+    /**
+     * Переменная для выбора шаблона, которой нужно присвоить лишь
+     * название дефолтного html шаблона(****.php файла в котором
+     * генерируется весь html с помощью PHP
+     */
     public $layout = 'default';
 
     public function __construct($route)
@@ -15,8 +24,10 @@ class View
     }
 
     /**
-     * @param $title
-     * @param array $vars
+     * @param $title заголовок вкладки доступен в файлах вида как $title
+     * меняется из контроллера с помощью метода render
+     * @param array $vars переменная для передачи данных или модели в вид
+     * используя контроллез
      */
     public function render($title, $vars = [])
     {
@@ -35,7 +46,8 @@ class View
     }
 
     /**
-     * @param $url
+     * @param $url адре для автоматического перехода на другую страницу,
+     * так же можно использовать для обновления страницы
      */
     public static function redirect($url)
     {
@@ -64,9 +76,8 @@ class View
         exit(json_encode(['status'=>$status, 'message'=>$message]));
     }
 
-    //редирект
-
     /**
+     * редирект
      * @param $url
      */
     public function location($url)

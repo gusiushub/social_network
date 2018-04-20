@@ -8,13 +8,13 @@ use app\assets\defaultAssets;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <!-- SEO -->
     <meta name="description" content="150 words">
     <meta name="author" content="uipasta">
     <meta name="url" content="http://www.yourdomainname.com">
     <meta name="copyright" content="company name">
     <meta name="robots" content="index,follow">
-
     <title><?php echo $title; ?></title>
 
     <!-- Favicon -->
@@ -35,6 +35,7 @@ use app\assets\defaultAssets;
             <div class="rounder"></div>
         </div>
         <!-- Preloader End -->
+
         <!--Меню-->
         <ul class="menu-link">
             <?php if(isset($_SESSION['id'], $_SESSION['login'])) { ?>
@@ -42,11 +43,11 @@ use app\assets\defaultAssets;
             <li><a href="/dialog">Сообщения</a></li>
             <li><a href="/subscribers/<?php echo $_SESSION['id']; ?>/" >Подписчики</a></li>
             <li><a href="/subscriptions/<?php echo $_SESSION['id']; ?>" >Подписки</a></li>
-            <li><a href="/user/all">Пользователи</a></li>
+            <li><a href="/all">Пользователи</a></li>
             <?php } ?>
             <?php if(!isset($_SESSION['id'], $_SESSION['login'])){ ?>
-                <li><a href="/register">Регистрация</a></li>
-                <li><a href="/user/all">Пользователи</a></li>
+                <li><a href="/register/">Регистрация</a></li>
+                <li><a href="/all">Пользователи</a></li>
                 <li><a href="/about">О проекте</a></li>
                 <li><a href="/contact">Контакты</a></li>
             <?php } ?>
@@ -54,12 +55,13 @@ use app\assets\defaultAssets;
                 <li><a href="/logout">Выход</a></li>
             <?php } ?>
         </ul>
+        <!--Конец меню-->
 
         <!--Контент-->
         <?php echo $content; ?>
-        <!--Контент-->
+        <!--Контент конец-->
 
-        <?php if(isset($_SESSION['id'], $_SESSION['login'])){ ?>
+        <?php //if(isset($_SESSION['id'], $_SESSION['login'])){ ?>
         <!-- Footer Start -->
         <div class="col-md-12 page-body margin-top-50 footer">
             <footer>
@@ -70,8 +72,9 @@ use app\assets\defaultAssets;
                 <p>© Copyright 2018. All rights reserved</p>
             </footer>
         </div>
-        <?php } ?>
+        <?php // } ?>
         <a href="#" class="scroll-to-top"><i class="fa fa-long-arrow-up"></i></a>
+
         <!-- All Javascript Plugins  -->
         <?php defaultAssets::js(); ?>
     </body>

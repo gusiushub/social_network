@@ -2,24 +2,16 @@
 
 use app\core\View;
 
-$user = $vars['model']->userId($_GET['id']);
+$user = $vars['model']->userId(htmlspecialchars($_GET['id']));
 
 if(isset($_POST['post'])){
     $vars['model']->post();
     View::redirect('/user/'.$_SESSION['id']);
 }
 
-if (isset($_POST['avatarLoad'])){
-    $upload = $vars['model']->upLoadFile();
-    $_SESSION['avatar'] = $upload;
-    $vars['model']->updateAvatar($upload);
-    View::redirect('/user/'.$_SESSION['id']);
-}
 if(isset($_POST['addFriend'])){
-    if ($vars['model']->findFriend()==FALSE){
         $vars['model']->addFriend();
         View::redirect('/user/'.$_GET['id']);
-    }
 }
 ?>
 <div id="main">
@@ -29,7 +21,11 @@ if(isset($_POST['addFriend'])){
             <div class="col-md-3">
                 <div class="about-fixed">
                     <div class="my-pic">
+                        <?php if($user['avatar']==''){ ?>
+                        <img height="350px" src="../../../public/avatars/none.png" alt="">
+                        <?php } else{ ?>
                         <img height="350px" src="../../../public/avatars/<?php echo $user['avatar'] ?>" alt="">
+                        <?php } ?>
                         <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
                         <div id="menu" class="collapse">
                             <ul class="menu-link">
@@ -46,28 +42,20 @@ if(isset($_POST['addFriend'])){
                             <?php } else { ?>
                             <small>Offline</small>
                             <?php } ?>
-                            <h1><?php echo $user['first_name'].' '.$user['last_name'] ?></h1>
+                            <h1><?php echo $user['first_name'].' '.$user['last_name']; ?></h1>
                             <?php if($_SESSION['id']!=$_GET['id']) { ?>
                            <form method="post">
-                               <input type="submit" href="#" name="sms" class="btn btn-primary" value="Написать">
-                               <?php if($vars['model']->findFriend()==FALSE){ ?>
+                               <button name="sms" class="btn btn-primary" type="submit" href="#"><a href="/dialog/<?php echo $_GET['id'];?>/">Написать</a></button>
+                               <?php
+                               $findFriend = $vars['model']->findFriend();
+                               if($findFriend==false){ ?>
                                <input type="submit" href="#" name="addFriend" class="btn btn-primary" value="Подписаться">
                                <?php } ?>
                            </form>
                             <?php } ?>
                             <?php if($_SESSION['id']==$_GET['id']) { ?>
-                            <div class="btn-group">
-                                <a class="btn dropdown-toggle" style="float: left" data-toggle="dropdown" href="#">
-                                    Редактировать профиль
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <form enctype="multipart/form-data" method="post" class="forma">
-                                        <input type="file" class="fileForm" name="avatar" style="width: 100%;height: 60px;">
-                                        <input type="submit" class="btn btn-group-vertical" name="avatarLoad">
-                                    </form>
-                                </ul>
-                            </div>
+                            <small><a class="btn btn-outline-light" href="/edit/">Редактировать профиль</a> </small>
+
                         <?php } ?>
                                 <br><small><a href="/subscribers/<?php echo $_GET['id']; ?>" >Подписчики</a> </small> (<?php echo $vars['model']->countSubscribers(); ?>)
                                 <br><small><a href="/subscriptions/<?php echo $_GET['id']; ?>">Подписки</a> </small> (<?php echo $vars['model']->countFriends(); ?>)
@@ -87,12 +75,16 @@ if(isset($_POST['addFriend'])){
             <div class="col-md-9">
                 <div class="col-md-12 page-body">
                     <div class="row">
-
                         <div class="sub-title">
-                            <h2>My Blog</h2>
-                            <a href="/user/chat"><i class="icon-envelope"></i></a>
+                            <h2><?php
+                                $blogName = $vars['model']->getBlogName($_GET['id']);
+                                echo $blogName['blog_name'] ;
+                            ?></h2>
+                            <a href="/dialog"><i class="icon-envelope"></i></a>
                         </div>
-                        <?php if($_SESSION['id']==$_GET['id']) { ?>
+
+                        <!-- Blog Post Start -->
+                        <?php if($_SESSION['id'] == $_GET['id']) { ?>
                         <form method="POST">
                             <input type="text" class="form-control" name="title" placeholder="Заголовок">
                             <p> <textarea type="text" class="form-control" name="content" placeholder="Контент"></textarea></p>
@@ -101,7 +93,6 @@ if(isset($_POST['addFriend'])){
                         <?php } ?>
                         <div class="col-md-12 content-page">
                             <?php foreach($vars['model']->userPosts() as $var){ ?>
-                            <!-- Blog Post Start -->
                             <div class="col-md-12 blog-post">
                                 <div class="post-title">
                                     <a href="single.html"><h1><?php echo $var['title']; ?></h1></a>
@@ -111,16 +102,29 @@ if(isset($_POST['addFriend'])){
                                 </div>
                                 <p class="text-center" ><?php echo $var['content']; ?></p>
                                 <a href="single.html" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>
+                                <?php if($_GET['id'] == $_SESSION['id']){ ?>
+                                <form method="post">
+                                    <?php
+                                    if (isset($_POST['del'])){
+                                        $vars['model']->deletePost($var['id']);
+                                        View::redirect('/user/'.$_SESSION['id']);
+                                    }
+                                    ?>
+                                    <input name="del" class="btn btn-outline-light" type="submit" value="Удалить">
+                                </form>
+                                <?php } ?>
                             </div>
-                            <!-- Blog Post End -->
                             <?php } ?>
 
+<!--                            load-more-post-->
                             <div class="col-md-12 text-center">
                                 <a href="javascript:void(0)" id="load-more-post" class="load-more-button">Load</a>
                                 <div id="post-end-message"></div>
                             </div>
                         </div>
                     </div>
+                    <!-- Blog Post End -->
+
                     <!-- Subscribe Form Start -->
                     <div class="col-md-8 col-md-offset-2">
                         <form id="mc-form" method="post" action="http://uipasta.us14.list-manage.com/subscribe/post?u=854825d502cdc101233c08a21&amp;id=86e84d44b7">

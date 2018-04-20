@@ -5,13 +5,16 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
     <h3>Диалоги:</h3>
     <div class="row">
         <div class="col-lg-3">
+            <?php if (empty($usersId)){ ?>
+            <h3>У вас нет диалогов, так как вы ни на кого не подписаны.</h3>
+            <?php } ?>
             <ul class="list-group">
-                <?php foreach ($usersId as $user) { ?>
+                <?php  foreach ($usersId as $user) { ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <?php $userInfo = $vars['model']->userId($user['friend_id']);
-
-                    ?>
-                    <button class="btn btn-outline-light" type="submit" name="list"> <?php echo $userInfo['first_name'].' '.$userInfo['last_name'];?></button>
+                    <?php $userInfo = $vars['model']->userId($user['friend_id']); ?>
+                    <button class="btn btn-outline-light" type="submit" name="list">
+                        <a href="/dialog/<?php echo $userInfo['id'] ; ?>/"><?php echo $userInfo['login'];?></a>
+                    </button>
                     <span class="badge badge-primary badge-pill">14</span>
                 </li>
             <?php } ?>
@@ -80,12 +83,14 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
                     websocket.onclose   = function(ev){$('#message_box').append("<div class=\"system_msg\">Connection Closed</div>");};
                 });
             </script>
+
             <div class="chat_wrapper">
+                <h3>Общий чат</h3>
                 <div class="message_box" id="message_box"></div>
                 <div class="panel">
-                    <input type="text" name="name" id="name" placeholder="Your Name" maxlength="10" style="width:20%"  />
-                    <input type="text" name="message" id="message" placeholder="Message" maxlength="80" style="width:60%" />
-                    <button id="send-btn">Send</button>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Your Name" maxlength="10" style="width:20%"  />
+                    <input class="form-control" type="text" name="message" id="message" placeholder="Message" maxlength="80" style="width:60%" />
+                    <button class="btn btn-primary" id="send-btn">Send</button>
                 </div>
             </div>
             </form>

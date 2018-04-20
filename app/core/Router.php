@@ -1,4 +1,10 @@
 <?php
+/**
+ * router.php класс, котоый обрабатывает url
+ * всех запросов, т.е. разбивает, сортирует,
+ * образует ЧПУ для удобной работы с приложением
+ * и тд и тп
+ */
 
 
 namespace app\core;
@@ -36,7 +42,6 @@ class Router {
      * @param $params
      */
     public function add($route, $params){
-        // echo '<p>'.$route.'</p>';
         $route = '#^'.$route.'$#';
         $this->routes[$route] = $params;
     }
@@ -46,11 +51,8 @@ class Router {
      */
     public function math(){
         $url = trim($_SERVER['REQUEST_URI'], '/');
-        //debug($url);
         foreach ($this->routes as $route => $params) {
             if (preg_match($route, $url, $matches)) {
-                //debug($matches);
-                //echo '1234';
                 $this->params = $params;
                 return true;
              }
@@ -60,6 +62,7 @@ class Router {
 
     /**
      * ucfirst() - начало слова с большой буквы
+     * это делается для структуры приложения
      * */
     public function run()
     {

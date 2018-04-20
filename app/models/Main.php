@@ -131,6 +131,11 @@ class Main extends Model
         return $this->user->countFriends();
     }
 
+    public function updateBlogName()
+    {
+        return$this->user->updateBlogName();
+    }
+
     /**
      * @return null
      */
@@ -171,7 +176,10 @@ class Main extends Model
     {
          $this->message->sendMessage();
     }
-
+    public function toUser()
+    {
+        return $this->message->toUser();
+    }
     public function msgForUser()
     {
          $this->message->forUser();
@@ -180,6 +188,19 @@ class Main extends Model
     public function select($id)
     {
         return $this->user->select($id);
+    }
+
+    public function deletePost($id)
+    {
+        $this->article->delPost($id);
+    }
+    public function getBlogName($id)
+    {
+        return $this->user->getBlogName($id);
+    }
+    public function allUsers()
+    {
+        return $this->user->getAllUsers();
     }
 
 }

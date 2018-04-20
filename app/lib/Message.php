@@ -13,8 +13,8 @@ class Message
     public function __construct()
     {
         $config   = require '/../config/db.php';
-
-        $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['db_name'].'', $config['username'], $config['password']);
+        $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['db_name'],
+                                              $config['username'], $config['password']);
         $this->db->exec("SET CHARACTER SET utf8");
     }
 
@@ -32,8 +32,8 @@ class Message
         $sql="insert into messages (u_from,u_to,message,flag) values
     (:u_from,:u_to,:message,:flag)";
         $sth=$this->db->prepare($sql);
-        $sth->bindValue(':u_from', 1);// 1 - ID отправителя
-        $sth->bindValue(':u_to', 3);//1 - $to
+        $sth->bindValue(':u_from', $_SESSION['id']);// 1 - ID отправителя
+        $sth->bindValue(':u_to', $_GET['id']);//1 - $to
         $sth->bindValue(':message', $message);
         $sth->bindValue(':flag', 0);
         $sth->execute();
@@ -50,24 +50,49 @@ class Message
 
     public function forUser()
     {
-        $this->data=new Users;
+        $this->data = new Users;
         /**
          * Номер пользователя,для которого отображать сообщения
          */
-        $u_id=1;
+        $u_id=$_SESSION['id'];
         $this->db->exec("SET CHARACTER SET utf8");
         /**
          * Достаем сообщения
          */
-        $sql="select * from messages where u_to=? order by id desc";
+        $sql="select * from messages where u_to=:u_to order by id desc";
         $sth=$this->db->prepare($sql);
-        $sth->bindParam(1,$u_id,PDO::PARAM_INT);
+        $sth->bindParam(':u_to',$u_id,PDO::PARAM_INT);
         $sth->execute();
         $res=$sth->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $row){
-            $a = $this->data->useId($row['u_from']);
+            $a = $this->data->userId($row['u_from']);
             echo $a['login'].' : '.$row['message'].'<br><br>';
         }
+        $lastSms = $res[0];
+        $_GET['mess']=$lastSms['id'];
+    }
+    public function toUser()
+    {
+        $this->data = new Users;
+        /**
+         * Номер пользователя,для которого отображать сообщения
+         */
+        $u_id=$_GET['id'];
+        $this->db->exec("SET CHARACTER SET utf8");
+        /**
+         * Достаем сообщения
+         */
+        $sql="select * from messages where u_to=:u_to order by id desc";
+        $sth=$this->db->prepare($sql);
+        $sth->bindParam(':u_to',$u_id,PDO::PARAM_INT);
+        $sth->execute();
+        $res=$sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($res as $row){
+            $a = $this->data->userId($row['u_from']);
+            echo $a['login'].' : '.$row['message'].'<br><br>';
+        }
+        $lastSms = $res[0];
+        $_GET['mess']=$lastSms['id'];
     }
 
     public function readMessage()
@@ -75,12 +100,13 @@ class Message
         /**
          * Номер пользователя
          */
-        $u_id=1;
+        $u_id=$_GET['id'];
 
         /**
          * Получаем номер сообщения. Приводим его типу Integer
          */
-        $id_mess=(int)$_GET['id'];
+
+        $id_mess=(int)$_GET['mess'];
 
         $this->db->exec("SET CHARACTER SET utf8");
 

@@ -1,5 +1,9 @@
 <?php
 
+/***
+ * Класс для работы со статьями
+ */
+
 namespace app\lib;
 
 use app\core\Db;
@@ -19,17 +23,12 @@ class Article
     public function post()
     {
         if (isset($_POST['title'], $_POST['content'])) {
-            return $this->db->insert('posts', array(  'title' => $_POST['title'],
-                'content' => $_POST['content'],
-                'date' => date('Y-m-d',time()),
-                'user_id' => $_SESSION['id']));
+            return $this->db->insert('posts', array(   'title'   => htmlspecialchars($_POST['title']),
+                                                            'content' => htmlspecialchars($_POST['content']),
+                                                            'date'    => htmlspecialchars(date('Y-m-d',time())),
+                                                            'user_id' => htmlspecialchars($_SESSION['id'])));
         }
-        echo 'заполните все поля поля';
-    }
-
-    public function deleteArticle($id)
-    {
-        //
+        echo 'Заполните все поля поля!';
     }
 
     /**
@@ -39,6 +38,14 @@ class Article
     {
         return $this->db->queryRows('SELECT * FROM posts WHERE user_id=:id
                                             ORDER BY id DESC', array('id' => $_GET['id']));
+    }
+
+    /**
+     * @param $id
+     */
+    public function delPost($id)
+    {
+        $this->db->delete('posts',$id);
     }
 
 }
