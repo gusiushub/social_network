@@ -1,8 +1,4 @@
-<?php
-
-$users = $vars['model']->allUsers();
-
-?>
+<?php $users = $vars['model']->allUsers(); ?>
 <div class="container">
     <h2>Пользователи</h2>
     <ul>

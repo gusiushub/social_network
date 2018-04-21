@@ -176,9 +176,9 @@ class Main extends Model
     {
          $this->message->sendMessage();
     }
-    public function toUser()
+    public function toUserMsg()
     {
-        return $this->message->toUser();
+        return $this->message->toUserMsg();
     }
     public function msgForUser()
     {
@@ -201,6 +201,14 @@ class Main extends Model
     public function allUsers()
     {
         return $this->user->getAllUsers();
+    }
+    public function getRegion($ip)
+    {
+        $this->user->getRegion($ip);
+    }
+    public function textMsg($mes)
+    {
+        $this->message->textMsg($mes);
     }
 
 }

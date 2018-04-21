@@ -12,7 +12,6 @@ class Db
 {
     private $db;
 
-
     /**
      * Db constructor.
      */
@@ -61,8 +60,7 @@ class Db
         }
     }
 
-// Returns true/false
-
+    // Returns true/false
     /**
      * @param $table
      * @param $fields
@@ -230,7 +228,7 @@ class Db
         return implode(',', $this->quoteArray($arr));
     }
 
-// returns true/false
+    // returns true/false
     /**
      * @param $query
      * @param null $params

@@ -18,6 +18,11 @@ class Message
         $this->db->exec("SET CHARACTER SET utf8");
     }
 
+    public function textMsg($mes)
+    {
+        return $mes;
+    }
+
     /**
      * Принимаем постовые данные. Очистим сообщение от html тэгов
      * и приведем id получателя к типу integer
@@ -71,7 +76,7 @@ class Message
         $lastSms = $res[0];
         $_GET['mess']=$lastSms['id'];
     }
-    public function toUser()
+    public function toUserMsg()
     {
         $this->data = new Users;
         /**
@@ -92,7 +97,7 @@ class Message
             echo $a['login'].' : '.$row['message'].'<br><br>';
         }
         $lastSms = $res[0];
-        $_GET['mess']=$lastSms['id'];
+        $_SESSION['message']=$lastSms['id'];
     }
 
     public function readMessage()
@@ -106,7 +111,7 @@ class Message
          * Получаем номер сообщения. Приводим его типу Integer
          */
 
-        $id_mess=(int)$_GET['mess'];
+        $id_mess=(int)$_POST['message'];
 
         $this->db->exec("SET CHARACTER SET utf8");
 
@@ -133,7 +138,7 @@ class Message
         /**
          * Выводим сообщение с датой отправки
          */
-        if($res['id']<>''){
+        if($res['id']<>'' or $res['u_from']==$_SESSION['id']){
             echo '<div>'.$res['message'].'</div>Дата отправки: '.$res['data'];
         }else{
             echo 'Данного сообщения не существует или оно предназначено не вам.';

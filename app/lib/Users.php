@@ -8,6 +8,7 @@ namespace app\lib;
 use app\core\View;
 use app\core\Db;
 use PDO;
+use SimpleXMLElement;
 
 class Users
 {
@@ -214,5 +215,23 @@ class Users
     {
         return $this->db->update('users', array('blog_name' => htmlspecialchars($_POST['nameBlog'])), 'id=:id',
                                                                         array(':id' => $_SESSION['id']));
+    }
+    public function getRegion($ip)
+    {
+
+        /*получаем информацию о ip в виде xml-файла от сервиса ipgeobase.ru*/
+        $result = file_get_contents("http://ipgeobase.ru:7020/geo?ip=".$ip);
+
+        /*Формируем DOM-структуру из полученного xml*/
+        $xml = new SimpleXMLElement($result);
+        /*Выводим полученную информацию*/
+        echo "Информация об IP ".$xml->ip->attributes[0]."<br>";
+        echo "Сеть: ".$xml->ip->inetnum."<br>";
+        echo "Страна: ".$xml->ip->country."<br>";
+        echo "Город: ".$xml->ip->city."<br>";
+        echo "Область: ".$xml->ip->region."<br>";
+        echo "Округ: ".$xml->ip->district."<br>";
+        echo "Широта: ".$xml->ip->lat."<br>";
+        echo "Долгота: ".$xml->ip->lng."<br>";
     }
 }

@@ -1,5 +1,9 @@
 <?php
+
+use app\core\View;
+
 $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
+
 ?>
 <div class="container">
     <h3>Диалоги:</h3>
@@ -20,31 +24,37 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
             </ul>
         </div>
         <div class="col-lg-9">
-            <form method="post">
+
                 <div class="chat_wrapper">
-                    <?php
-                    if(isset($_POST['sms'])){
 
 
-                    ?>
                     <div class="message_box" id="message_box">
                         <?php
                         echo '<br>';
                         $vars['model']->sendMessage();echo '<br>';
-                        $vars['model']->msgForUser();
-                        $vars['model']->toUser();
+                        //$vars['model']->readMessage();echo '<br>';
+
+                        //$vars['model']->msgForUser();
+                        //$vars['model']->toUserMsg();
                        // $vars['model']->readMessage();
                         echo '<br>';
+                        if(isset($_POST['sms'])){
+                            $_SESSION['msg'] = $_POST['message'];
+                            var_dump($_SESSION['msg']);
+                           View::redirect('/dialog/'.$_GET['id']);
                         }
+                        echo $vars['model']->msgForUser();
+
                         ?></div>
                     <div class="panel">
+                        <form method="post">
 
                         <input class="form-control" type="text" name="message" id="message" placeholder="Message" maxlength="80" style="width:100%" />
                         <input class="btn btn-primary mb-2" type="submit" name="sms" value="Отправить"><br>
+                        </form>
 
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 </div>

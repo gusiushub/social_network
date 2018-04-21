@@ -9,15 +9,15 @@ if (isset($_POST['avatarLoad'])){
 if (isset($_POST['saveNameBlog']) && $_POST['nameBlog'] != '' && $_POST['nameBlog']!=null){
     $vars['model']->updateBlogName();
     View::redirect('/edit/');
-
 }
 ?>
-
 <div id="main">
     <div class="container">
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-5">
+                <?php echo 'Здравствуйте,'.$_SESSION['first_name'].', ваш';?><br>
+                <?php echo 'ip адрес сервера: '.$_SERVER['SERVER_ADDR']; ?>
                 <p><h2>Редактировать профиль:</h2></p><br>
                 <form enctype="multipart/form-data" method="post">
                     <h3>Название блога</h3>
