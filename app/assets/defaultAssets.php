@@ -1,4 +1,7 @@
 <?php
+/**
+ * Стили приложения
+ */
 
 namespace app\assets;
 

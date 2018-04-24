@@ -100,7 +100,7 @@ class Main extends Model
     }
 
     /**
-     * @return null
+     * @return null добавить друга
      */
     public function addFriend()
     {
@@ -108,7 +108,7 @@ class Main extends Model
     }
 
     /**
-     * @return null
+     * @return null вывести друзей
      */
     public function getFriends()
     {
@@ -116,7 +116,7 @@ class Main extends Model
     }
 
     /**
-     * @return null
+     * @return null найти друга
      */
     public function findFriend()
     {
@@ -124,13 +124,16 @@ class Main extends Model
     }
 
     /**
-     * @return int
+     * @return int кол-во друзей
      */
     public function countFriends()
     {
         return $this->user->countFriends();
     }
 
+    /**
+     * @return mixed изменить название блога
+     */
     public function updateBlogName()
     {
         return$this->user->updateBlogName();
@@ -161,54 +164,103 @@ class Main extends Model
         return $this->user->Subscribers($id);
     }
 
-
+    /**
+     * @param $data
+     * @return \app\lib\подписки
+     */
     public function getSubscriptions($data)
     {
         return $this->user->getSubscriptions($data);
     }
 
+    /**
+     * прочитать сообщение
+     */
     public function readMessage()
     {
          $this->message->readMessage();
     }
 
+    /**
+     * отправить сообщение
+     */
     public function sendMessage()
     {
          $this->message->sendMessage();
     }
+
+    /**
+     * кому(сообщение)
+     */
     public function toUserMsg()
     {
         return $this->message->toUserMsg();
     }
+
+    /**
+     * от кого (смс)
+     */
     public function msgForUser()
     {
          $this->message->forUser();
     }
 
+    /**
+     * @param $id
+     * @return null
+     */
     public function select($id)
     {
         return $this->user->select($id);
     }
 
+    /**
+     * @param $id удалить пост
+     */
     public function deletePost($id)
     {
         $this->article->delPost($id);
     }
+
+    /**
+     * @param $id
+     * @return \app\lib\название
+     */
     public function getBlogName($id)
     {
         return $this->user->getBlogName($id);
     }
+
+    /**
+     * @return array получить всех юзеров
+     */
     public function allUsers()
     {
         return $this->user->getAllUsers();
     }
+
+    /**
+     * @param $ip
+     */
     public function getRegion($ip)
     {
         $this->user->getRegion($ip);
     }
+
+    /**
+     * @param $mes
+     */
     public function textMsg($mes)
     {
         $this->message->textMsg($mes);
+    }
+
+    /**
+     * @return mixed вывести диалог
+     */
+    public function getDialog()
+    {
+        return $this->message->getDialog();
     }
 
 }

@@ -70,7 +70,6 @@ if(isset($_POST['addFriend'])){
                 </div>
             </div>
             <!-- About Me (Left Sidebar) End -->
-
             <!-- Blog Post (Right Sidebar) Start -->
             <div class="col-md-9">
                 <div class="col-md-12 page-body">
@@ -101,7 +100,7 @@ if(isset($_POST['addFriend'])){
                                     <span><?php echo $var['date']; ?>/ by <a href="#" target="_blank"><?php echo $user['first_name'].' '.$user['last_name'] ?></a></span>
                                 </div>
                                 <p class="text-center" ><?php echo $var['content']; ?></p>
-                                <a href="single.html" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>
+<!--                                <a href="single.html" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>-->
                                 <?php if($_GET['id'] == $_SESSION['id']){ ?>
                                 <form method="post">
                                     <?php
@@ -110,13 +109,13 @@ if(isset($_POST['addFriend'])){
                                         View::redirect('/user/'.$_SESSION['id']);
                                     }
                                     ?>
-                                    <input name="del" class="btn btn-outline-light" type="submit" value="Удалить">
+                                    <input name="del" class="btn btn-outline-light" type="submit" value="Удалить" style="float: right;">
                                 </form>
                                 <?php } ?>
                             </div>
                             <?php } ?>
 
-<!--                            load-more-post-->
+                            <!--load-more-post-->
                             <div class="col-md-12 text-center">
                                 <a href="javascript:void(0)" id="load-more-post" class="load-more-button">Load</a>
                                 <div id="post-end-message"></div>
@@ -124,18 +123,4 @@ if(isset($_POST['addFriend'])){
                         </div>
                     </div>
                     <!-- Blog Post End -->
-
-                    <!-- Subscribe Form Start -->
-                    <div class="col-md-8 col-md-offset-2">
-                        <form id="mc-form" method="post" action="http://uipasta.us14.list-manage.com/subscribe/post?u=854825d502cdc101233c08a21&amp;id=86e84d44b7">
-
-                            <div class="subscribe-form margin-top-20">
-                                <input id="mc-email" type="email" placeholder="Email Address" class="text-input">
-                                <button class="submit-btn" type="submit">Submit</button>
-                            </div>
-                            <p>Subscribe to my weekly newsletter</p>
-                            <label for="mc-email" class="mc-label"></label>
-                        </form>
-                    </div>
-                    <!-- Subscribe Form End -->
                 </div>

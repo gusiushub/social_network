@@ -7,7 +7,7 @@ use app\models\Main;
 
 class MainController extends Controller
 {
-    public function indexAction()   
+    public function indexAction()
     {
         $model = new Main;
         $vars = ['model' => $model];
@@ -19,6 +19,20 @@ class MainController extends Controller
         $model = new Main;
         $vars = ['model' => $model];
         $this->view->render('Диалоги', $vars);
+    }
+
+    public function aboutAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('О нас', $vars);
+    }
+
+    public function feedbackAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('Обратная связь', $vars);
     }
 
     public function chatAction()
@@ -73,7 +87,7 @@ class MainController extends Controller
     {
         $model = new Main;
         $vars = ['model' => $model];
-        $this->view->render('Ред. профиль', $vars);
+        $this->view->render('Пользователи', $vars);
     }
 
 }

@@ -9,7 +9,9 @@ return [
         'dialog',
         'chat',
         'edit',
-        'all'
+        'all',
+        'about',
+        'feedback'
     ],
     'authorize' => [
         //

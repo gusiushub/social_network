@@ -14,7 +14,7 @@ class Form
     }
 
     /**
-     * @return bool
+     * @return bool валидация формы регистрации
      */
     public function regValidate()
     {
@@ -28,7 +28,7 @@ class Form
                         $_POST['E-mail']    ,
                         $_POST['login']     ,
                         $_POST['password']) &&
-                        $_POST['password']===$_POST['password2']){
+                        $_POST['password'] === $_POST['password2']){
                 if($nameLen < 1 or $nameLen > 15){
                     return false;
                 }else {

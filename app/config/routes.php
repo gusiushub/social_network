@@ -1,11 +1,24 @@
 <?php
 
-// Маршруты
+/**
+ * Маршруты
+ */
+
 return [
 
     '' => [
         'controller' => 'main',
         'action' => 'index',
+    ],
+
+    'feedback' => [
+        'controller' => 'main',
+        'action' => 'feedback',
+    ],
+
+    'about' => [
+        'controller' => 'main',
+        'action' => 'about',
     ],
 
     'edit' => [
@@ -52,7 +65,4 @@ return [
         'controller' => 'main',
         'action' => 'all',
     ],
-
-
-
 ];
