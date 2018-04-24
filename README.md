@@ -41,6 +41,16 @@ classes are documented and most of the core components work properly but there w
 documentation as is necessary to configure the framework. A sample full version app is coming soon.
 Now it's a social network that is in development**
 
+What is implemented
+-------------------
+> 1) registration / authorization
+> 2) profile system
+> 3) dialogue system
+> 4) shared chat using sockets
+> 5) subscription system
+> 6) The opportunity to publish articles
+> 7) The ability to edit the profile
+
 Example of working with the database
 -------------------------------------
     $db = new Db();
@@ -59,6 +69,7 @@ Example of working with the database
     
     // Изменение записи (UPDATE)
     $db->update('users', array('name' => 'UpdatedName'), 'id=:id', array(':id' => $newUserId));
+    
 Front end
 ----------    
 **Css files and javascript are connected to the app \ assets directory by a separate class for each layout.

@@ -3,7 +3,7 @@
 namespace app\lib;
 
 use app\core\Db;
-use app\lib\Users;
+//use app\lib\Users;
 use PDO;
 
 class Message
