@@ -55,8 +55,7 @@ if(isset($_POST['addFriend'])){
                             <?php } ?>
                             <?php if($_SESSION['id']==$_GET['id']) { ?>
                             <small><a class="btn btn-outline-light" href="/edit/">Редактировать профиль</a> </small>
-
-                        <?php } ?>
+                            <?php } ?>
                                 <br><small><a href="/subscribers/<?php echo $_GET['id']; ?>" >Подписчики</a> </small> (<?php echo $vars['model']->countSubscribers(); ?>)
                                 <br><small><a href="/subscriptions/<?php echo $_GET['id']; ?>">Подписки</a> </small> (<?php echo $vars['model']->countFriends(); ?>)
                         </div>
@@ -100,7 +99,7 @@ if(isset($_POST['addFriend'])){
                                     <span><?php echo $var['date']; ?>/ by <a href="#" target="_blank"><?php echo $user['first_name'].' '.$user['last_name'] ?></a></span>
                                 </div>
                                 <p class="text-center" ><?php echo $var['content']; ?></p>
-<!--                                <a href="single.html" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>-->
+<!-- <a href="single.html" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>-->
                                 <?php if($_GET['id'] == $_SESSION['id']){ ?>
                                 <form method="post">
                                     <?php
@@ -123,4 +122,14 @@ if(isset($_POST['addFriend'])){
                         </div>
                     </div>
                     <!-- Blog Post End -->
+                </div>
+                <!-- Footer Start -->
+                <div class="col-md-12 page-body margin-top-50 footer ">
+                    <footer>
+                        <ul class="menu-link">
+                            <li><a href="/about">О проекте</a></li>
+                            <li><a href="/feedback">Связаться с нами</a></li>
+                        </ul>
+                        <p>© Copyright 2018. All rights reserved</p>
+                    </footer>
                 </div>

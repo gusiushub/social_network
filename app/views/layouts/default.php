@@ -46,6 +46,7 @@ use app\assets\defaultAssets;
             <li><a href="/all">Пользователи</a></li>
             <?php } ?>
             <?php if(!isset($_SESSION['id'], $_SESSION['login'])){ ?>
+                <li><a href="/">Авторизация</a></li>
                 <li><a href="/register/">Регистрация</a></li>
                 <li><a href="/all">Пользователи</a></li>
                 <li><a href="/about">О проекте</a></li>
@@ -61,18 +62,7 @@ use app\assets\defaultAssets;
         <?php echo $content; ?>
         <!--Контент конец-->
 
-        <?php //if(isset($_SESSION['id'], $_SESSION['login'])){ ?>
-        <!-- Footer Start -->
-        <div class="col-md-12 page-body margin-top-50 footer">
-            <footer>
-                <ul class="menu-link">
-                    <li><a href="/about">О проекте</a></li>
-                    <li><a href="/feedback">Связаться с нами</a></li>
-                </ul>
-                <p>© Copyright 2018. All rights reserved</p>
-            </footer>
-        </div>
-        <?php // } ?>
+
         <a href="#" class="scroll-to-top"><i class="fa fa-long-arrow-up"></i></a>
 
         <!-- All Javascript Plugins  -->

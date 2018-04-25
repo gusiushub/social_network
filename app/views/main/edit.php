@@ -48,3 +48,13 @@ if (isset($_POST['saveNameBlog']) && $_POST['nameBlog'] != '' && $_POST['nameBlo
         </div>
     </div>
 </div
+<!-- Footer Start -->
+<div class="col-md-12 page-body margin-top-50 footer ">
+    <footer>
+        <ul class="menu-link">
+            <li><a href="/about">О проекте</a></li>
+            <li><a href="/feedback">Связаться с нами</a></li>
+        </ul>
+        <p>© Copyright 2018. All rights reserved</p>
+    </footer>
+</div>

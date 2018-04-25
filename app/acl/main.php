@@ -2,25 +2,30 @@
 
 return [
     'all' => [
-        'subscribers',
-        'subscriptions',
+
+        'about',
+        'all',
+        'feedback',
+        'contact',
+
+    ],
+
+    'authorize' => [
         'user',
         'logout',
         'dialog',
         'chat',
         'edit',
-        'all',
-        'about',
-        'feedback'
+        'subscribers',
+        'subscriptions',
     ],
-    'authorize' => [
-        //
-    ],
+
     'guest' => [
         'index',
         'register'
     ],
+
     'admin' => [
-        //
+
     ],
 ];

@@ -23,23 +23,20 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
                     <div class="message_box" id="message_box">
                         <?php
                         $messages = $vars['model']->getDialog();
-                        //var_dump($messages);
                         foreach ($messages as $message){ ?>
                             <h4>
                                 <?php if($message['u_from'] == $_SESSION['id']){echo 'Вы:';
                                 }elseif($message['u_from'] == $_GET['id']){echo 'Ваш собеседник:';} ?>
                             </h4>
                             <p><?php echo $message['message']; ?></p>
+                            <hr>
                         <?php } ?>
                         <?php
-                        echo '<br>';
-                        $vars['model']->sendMessage();echo '<br>';
-                        echo '<br>';
+                        $vars['model']->sendMessage();//echo '<br>';
                         if(isset($_POST['sms'])){
                             $_SESSION['msg'] = $_POST['message'];
                            View::redirect('/dialog/'.$_GET['id']);
                         }
-                        //echo $vars['model']->msgForUser();
                         ?>
                     </div>
                     <div class="panel">
@@ -51,5 +48,15 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
                 </div>
         </div>
     </div>
+</div>
+<!-- Footer Start -->
+<div class="col-md-12 page-body margin-top-50 footer ">
+    <footer>
+        <ul class="menu-link">
+            <li><a href="/about">О проекте</a></li>
+            <li><a href="/feedback">Связаться с нами</a></li>
+        </ul>
+        <p>© Copyright 2018. All rights reserved</p>
+    </footer>
 </div>
 

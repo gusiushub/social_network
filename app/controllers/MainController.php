@@ -23,9 +23,7 @@ class MainController extends Controller
 
     public function aboutAction()
     {
-        $model = new Main;
-        $vars = ['model' => $model];
-        $this->view->render('О нас', $vars);
+        $this->view->render('О нас');
     }
 
     public function feedbackAction()
@@ -89,5 +87,8 @@ class MainController extends Controller
         $vars = ['model' => $model];
         $this->view->render('Пользователи', $vars);
     }
-
+    public function contactAction()
+    {
+        $this->view->render('Контакты');
+    }
 }

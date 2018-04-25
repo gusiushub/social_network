@@ -85,6 +85,8 @@ class Users
         $_SESSION['first_name'] = $user['first_name'];
         $_SESSION['login']      = $user['login'];
         $_SESSION['active']     = 1;
+        $_SESSION['authorize'] = 1;
+
     }
 
     /**
@@ -114,6 +116,7 @@ class Users
         unset($_SESSION['first_name']);
         unset($_SESSION['login']);
         unset($_SESSION['avatar']);
+        unset($_SESSION['authorize']);
         $_SESSION['active']=0;
         $this->activeStatus();
         unset($_SESSION['id']);
