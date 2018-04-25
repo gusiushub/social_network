@@ -22,7 +22,8 @@ return [
 
     'guest' => [
         'index',
-        'register'
+        'register',
+        'restore'
     ],
 
     'admin' => [

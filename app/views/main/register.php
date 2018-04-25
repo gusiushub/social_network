@@ -9,7 +9,7 @@ if (isset($_POST['loginSubmit'])){
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <p><h1>Регистрация:</h1></p>
+                <h1>Регистрация:</h1>
                 <form method="post">
                     <p><input class="form-control" type="text" name="first_name" placeholder="Имя"></p>
                     <p><input class="form-control" type="text" name="last_name" placeholder="Фамилия"></p>

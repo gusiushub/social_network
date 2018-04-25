@@ -87,8 +87,16 @@ class MainController extends Controller
         $vars = ['model' => $model];
         $this->view->render('Пользователи', $vars);
     }
+
     public function contactAction()
     {
         $this->view->render('Контакты');
+    }
+
+    public function restoreAction()
+    {
+        $model = new Main;
+        $vars = ['model' => $model];
+        $this->view->render('Смена пароля', $vars);
     }
 }

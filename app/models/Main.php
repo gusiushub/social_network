@@ -8,6 +8,7 @@ use app\lib\Files;
 use app\lib\Form;
 use app\lib\Users;
 use app\lib\Message;
+use app\lib\Mail;
 
 class Main extends Model
 {
@@ -16,6 +17,7 @@ class Main extends Model
     private $form;
     private $article;
     private $message;
+    private $mail;
 
     public function __construct()
     {
@@ -24,6 +26,7 @@ class Main extends Model
         $this->form    = new Form;
         $this->article = new Article;
         $this->message = new Message;
+        $this->mail    = new Mail;
     }
 
     /**
@@ -261,6 +264,11 @@ class Main extends Model
     public function getDialog()
     {
         return $this->message->getDialog();
+    }
+
+    public function restore()
+    {
+        return $this->mail->restore();
     }
 
 }

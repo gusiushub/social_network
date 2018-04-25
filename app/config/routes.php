@@ -11,6 +11,11 @@ return [
         'action' => 'index',
     ],
 
+    'restore' => [
+        'controller' => 'main',
+        'action' => 'restore',
+    ],
+
     'contact' => [
         'controller' => 'main',
         'action' => 'contact',
