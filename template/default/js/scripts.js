@@ -38,35 +38,35 @@
 
         
        /* Preloader */
-		
-        // $(window).load(function () {
-        //     $('.preloader').delay(800).fadeOut('slow');
-        //  });
-		 		
-		
-		
+
+        $(window).load(function () {
+            $('.preloader').delay(800).fadeOut('slow');
+         });
+
+
+
        /* Smooth Scroll */
-        //
-        // $('a.smoth-scroll').on("click", function (e) {
-        //     var anchor = $(this);
-        //     $('html, body').stop().animate({
-        //         scrollTop: $(anchor.attr('href')).offset().top - 50
-        //     }, 1000);
-        //     e.preventDefault();
-        // });
-				 
-		
-		
-		
+
+        $('a.smoth-scroll').on("click", function (e) {
+            var anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(anchor.attr('href')).offset().top - 50
+            }, 1000);
+            e.preventDefault();
+        });
+
+
+
+
        /* Scroll To Top */
-		
-        // $(window).scroll(function(){
-        // if ($(this).scrollTop() >= 500) {
-        //     $('.scroll-to-top').fadeIn();
-        //  } else {
-        //     $('.scroll-to-top').fadeOut();
-        //  }
-        //  });
+
+        $(window).scroll(function(){
+        if ($(this).scrollTop() >= 500) {
+            $('.scroll-to-top').fadeIn();
+         } else {
+            $('.scroll-to-top').fadeOut();
+         }
+         });
 	
 	
         $('.scroll-to-top').click(function(){

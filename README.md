@@ -3,6 +3,9 @@ MVC framework using a namespace
 
 Installation
 --------------
+**RECOMMENDED SETTINGS**<br>
+        `Apache 2.4`<br>
+        `php5.6`<br>
 **The first step is cloning the base template
 git clone https://github.com/gusiushub/social_network.git** <br>
 **The minimum required PHP version is PHP 5.6.**
