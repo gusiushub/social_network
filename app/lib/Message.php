@@ -39,8 +39,8 @@ class Message
         if(!empty($_POST['message'])) {
             $message = htmlspecialchars($_POST['message']);
             $this->db->exec("SET CHARACTER SET utf8");
-            $sql = "insert into messages (u_from,u_to,message,flag) values
-    (:u_from,:u_to,:message,:flag)";
+            $sql = "INSERT INTO messages (u_from, u_to, message, flag) VALUES
+                                         (:u_from, :u_to, :message, :flag)";
             $sth = $this->db->prepare($sql);
             $sth->bindValue(':u_from', $_SESSION['id']);// 1 - ID отправителя
             $sth->bindValue(':u_to', $_GET['id']);//1 - $to
@@ -73,7 +73,7 @@ class Message
         /**
          * Достаем сообщения
          */
-        $sql="select * from messages where u_to=:u_to order by id desc";
+        $sql="SELECT * FROM messages WHERE u_to=:u_to ORDER BY id DESC";
         $sth=$this->db->prepare($sql);
         $sth->bindParam(':u_to',$u_id,PDO::PARAM_INT);
         $sth->execute();

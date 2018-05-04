@@ -36,11 +36,10 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
                         if(isset($_POST['sms'])){
                             $_SESSION['msg'] = $_POST['message'];
                            View::redirect('/dialog/'.$_GET['id']);
-                        }
-                        ?>
+                        } ?>
                     </div>
                     <div class="panel">
-                        <form method="post">
+                        <form method="POST">
                         <input class="form-control" type="text" name="message" id="message" placeholder="Message" maxlength="80" style="width:100%" />
                         <input class="btn btn-primary mb-2" type="submit" name="sms" value="Отправить"><br>
                         </form>

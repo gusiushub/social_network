@@ -38,7 +38,7 @@ if(isset($_POST['addFriend'])){
                     </div>
                     <div class="my-detail">
                         <div class="white-spacing">
-                            <?php if($vars['model']->ActiveStatus()==1) { ?>
+                            <?php if($vars['model']->activeStatus()==1) { ?>
                             <small>Online</small>
                             <?php } else { ?>
                             <small>Offline</small>
@@ -75,10 +75,8 @@ if(isset($_POST['addFriend'])){
                 <div class="col-md-12 page-body">
                     <div class="row">
                         <div class="sub-title">
-                            <h2><?php
-                                $blogName = $vars['model']->getBlogName($_GET['id']);
-                                echo $blogName['blog_name'] ;
-                            ?></h2>
+                                <?php $blogName = $vars['model']->getBlogName($_GET['id']);?>
+                            <h1 class="display-1"><?php echo $blogName['blog_name'] ;?></h1>
                             <a href="/dialog"><i class="icon-envelope"></i></a>
                         </div>
 
@@ -102,7 +100,6 @@ if(isset($_POST['addFriend'])){
                                     }
                                 }
                                 ?>
-<!-- <div class="col-md-12 blog-post">-->
                                 <div class="post-title">
                                     <a href="#"><h1><?php  echo $var['title'];?></h1></a>
                                 </div>
@@ -110,10 +107,11 @@ if(isset($_POST['addFriend'])){
                                     <span><?php echo $var['date']; ?>/ by <a href="#" target="_blank"><?php echo $user['first_name'].' '.$user['last_name'] ?></a></span>
                                 </div>
                                 <p class="text-center" ><?php echo $var['content']; ?></p>
+                            <?php if($_SESSION['id'] == $_GET['id']) { ?>
                                 <form method="POST">
                                     <input name="<?php echo 'del'.$var['id']?>" class="btn btn-outline-light" type="submit" value="Удалить" style="float: right;">
                                 </form>
-<!--</div>-->
+                                <?php } ?>
                             <?php } ?>
                             <!--load-more-post-->
                             <div class="col-md-12 text-center">

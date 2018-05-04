@@ -8,6 +8,12 @@ Installation
         `php5.6`<br>
 **The first step is cloning the base template
 git clone https://github.com/gusiushub/social_network.git** <br>
+            
+            cd app/composer
+            composer update
+            
+            cd app/console
+            php -q server.php
 **The minimum required PHP version is PHP 5.6.**
 
 Directory Structure
