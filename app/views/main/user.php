@@ -13,6 +13,7 @@ if(isset($_POST['addFriend'])){
         $vars['model']->addFriend();
         View::redirect('/user/'.$_GET['id']);
 }
+
 ?>
 <div id="main">
     <div class="container">
@@ -44,7 +45,7 @@ if(isset($_POST['addFriend'])){
                             <?php } ?>
                             <h1><?php echo $user['first_name'].' '.$user['last_name']; ?></h1>
                             <?php if($_SESSION['id']!=$_GET['id']) { ?>
-                           <form method="post">
+                           <form method="POST">
                                <button name="sms" class="btn btn-primary" type="submit" href="#"><a href="/dialog/<?php echo $_GET['id'];?>/">Написать</a></button>
                                <?php
                                $findFriend = $vars['model']->findFriend();
@@ -90,30 +91,30 @@ if(isset($_POST['addFriend'])){
                         </form>
                         <?php } ?>
                         <div class="col-md-12 content-page">
-                            <?php foreach($vars['model']->userPosts() as $var){ ?>
-                            <div class="col-md-12 blog-post">
+                            <?php
+                            $postVar = $vars['model'];
+                            $vars = $vars['model']->userPosts();
+                            foreach($vars as $var){
+                                if($_GET['id'] == $_SESSION['id']) {
+                                    if (isset($_POST['del'.$var['id']])) {
+                                        $postVar->deletePost($var['id']);
+                                        View::redirect('/user/' . $_SESSION['id']);
+                                    }
+                                }
+                                ?>
+<!-- <div class="col-md-12 blog-post">-->
                                 <div class="post-title">
-                                    <a href="single.html"><h1><?php echo $var['title']; ?></h1></a>
+                                    <a href="#"><h1><?php  echo $var['title'];?></h1></a>
                                 </div>
                                 <div class="post-info">
                                     <span><?php echo $var['date']; ?>/ by <a href="#" target="_blank"><?php echo $user['first_name'].' '.$user['last_name'] ?></a></span>
                                 </div>
                                 <p class="text-center" ><?php echo $var['content']; ?></p>
-<!-- <a href="single.html" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>-->
-                                <?php if($_GET['id'] == $_SESSION['id']){ ?>
-                                <form method="post">
-                                    <?php
-                                    if (isset($_POST['del'])){
-                                        $vars['model']->deletePost($var['id']);
-                                        View::redirect('/user/'.$_SESSION['id']);
-                                    }
-                                    ?>
-                                    <input name="del" class="btn btn-outline-light" type="submit" value="Удалить" style="float: right;">
+                                <form method="POST">
+                                    <input name="<?php echo 'del'.$var['id']?>" class="btn btn-outline-light" type="submit" value="Удалить" style="float: right;">
                                 </form>
-                                <?php } ?>
-                            </div>
+<!--</div>-->
                             <?php } ?>
-
                             <!--load-more-post-->
                             <div class="col-md-12 text-center">
                                 <a href="javascript:void(0)" id="load-more-post" class="load-more-button">Load</a>

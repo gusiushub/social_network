@@ -2,7 +2,7 @@
 use app\assets\defaultAssets;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <!-- Meta Tag -->
     <meta charset="UTF-8">

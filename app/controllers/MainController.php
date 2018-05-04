@@ -65,7 +65,7 @@ class MainController extends Controller
     {
         $model = new Main;
         $vars = ['model' => $model];
-        $this->view->render('подписчики', $vars);
+        $this->view->render('Подписчики', $vars);
     }
 
     public function editAction()

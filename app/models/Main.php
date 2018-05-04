@@ -30,7 +30,8 @@ class Main extends Model
     }
 
     /**
-     * @return array
+     * @param $id
+     * @return \app\lib\пользователь
      */
     public function userId($id)
     {
@@ -197,7 +198,7 @@ class Main extends Model
      */
     public function toUserMsg()
     {
-        return $this->message->toUserMsg();
+        $this->message->toUserMsg();
     }
 
     /**
@@ -218,11 +219,11 @@ class Main extends Model
     }
 
     /**
-     * @param $id удалить пост
+     * @param $id delete post
      */
     public function deletePost($id)
     {
-        $this->article->delPost($id);
+         $this->article->delPost($id);
     }
 
     /**
@@ -243,14 +244,6 @@ class Main extends Model
     }
 
     /**
-     * @param $ip
-     */
-    public function getRegion($ip)
-    {
-        $this->user->getRegion($ip);
-    }
-
-    /**
      * @param $mes
      */
     public function textMsg($mes)
@@ -266,9 +259,12 @@ class Main extends Model
         return $this->message->getDialog();
     }
 
+    /**
+     *
+     */
     public function restore()
     {
-        return $this->mail->restore();
+        $this->mail->restore();
     }
 
 }

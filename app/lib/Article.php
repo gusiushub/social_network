@@ -12,6 +12,9 @@ class Article
 {
     public $db;
 
+    /**
+     * Article constructor.
+     */
     public function __construct()
     {
         $this->db = new Db;
@@ -22,7 +25,7 @@ class Article
      */
     public function post()
     {
-        if (isset($_POST['title'], $_POST['content'])) {
+        if (isset($_POST['title'] , $_POST['content'])) {
             return $this->db->insert('posts', array(   'title'   => htmlspecialchars($_POST['title']),
                                                             'content' => htmlspecialchars($_POST['content']),
                                                             'date'    => htmlspecialchars(date('Y-m-d',time())),
@@ -45,7 +48,7 @@ class Article
      */
     public function delPost($id)
     {
-        $this->db->delete('posts',$id);
+        return $this->db->delete("posts", $id);
     }
 
 }

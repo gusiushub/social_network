@@ -6,6 +6,7 @@
 
 namespace app\core;
 
+use http\Exception;
 use PDO;
 
 class Db
@@ -98,7 +99,7 @@ class Db
 
     public function delete($table, $param)
     {
-        $this->db->exec("DELETE FROM ".$table." WHERE id=".$param);
+         $this->db->exec("DELETE FROM ".$table." WHERE id=".$param);
     }
 
     /**

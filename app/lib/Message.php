@@ -3,14 +3,16 @@
 namespace app\lib;
 
 use app\core\Db;
-//use app\lib\Users;
 use PDO;
 
 class Message
 {
-    protected $db;
-    protected $data;
+    private $db;
+    private $data;
 
+    /**
+     * Message constructor.
+     */
     public function __construct()
     {
         $config   = require '/../config/db.php';
@@ -36,11 +38,7 @@ class Message
     {
         if(!empty($_POST['message'])) {
             $message = htmlspecialchars($_POST['message']);
-
-            //$to=(int)$_POST['to'];
-
             $this->db->exec("SET CHARACTER SET utf8");
-
             $sql = "insert into messages (u_from,u_to,message,flag) values
     (:u_from,:u_to,:message,:flag)";
             $sth = $this->db->prepare($sql);
