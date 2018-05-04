@@ -1,10 +1,8 @@
-<?php
-$usersId = $vars['model']->getSubscriptions($_SESSION['id']);
-?>
+<?php $usersId = $vars['model']->getSubscriptions($_SESSION['id']); ?>
 <div class="container">
     <h3>Диалоги:</h3>
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-sm-12">
             <?php if (empty($usersId)){ ?>
             <h3>У вас нет диалогов, так как вы ни на кого не подписаны.</h3>
             <?php } ?>
@@ -20,14 +18,15 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
             <?php } ?>
             </ul>
         </div>
-        <div class="col-lg-9">
+        <div >
             <?php
             $colours = array('007AFF','FF7000','FF7000','15E25F','CFC700','CFC700','CF1100','CF00BE','F00');
             $user_colour = array_rand($colours);
             ?>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
             <script src="../../../template/default/js/chat.js" language="javascript" type="text/javascript"></script>
-                <div class="chat_wrapper">
+            <div class="col-">
+            <div class="chat_wrapper">
                     <h3>Общий чат</h3>
                     <div class="message_box" id="message_box"></div>
                     <div class="panel">
@@ -36,6 +35,7 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
                         <button class="btn btn-primary" id="send-btn">Send</button>
                     </div>
                 </div>
+            </div>
             </form>
         </div>
     </div>

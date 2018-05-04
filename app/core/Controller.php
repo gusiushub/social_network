@@ -26,7 +26,6 @@ abstract class Controller
         }
         $this->view = new View($route);
         $this->model = $this->loadModel($route['controller']);
-
     }
 
     /**

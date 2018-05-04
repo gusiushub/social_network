@@ -9,8 +9,12 @@ Installation
 **The first step is cloning the base template
 git clone https://github.com/gusiushub/social_network.git** <br>
             
+**Upgrade packages:**  
+ 
             cd app/composer
             composer update
+            
+**To start a shared console chat:**<br>
             
             cd app/console
             php -q server.php

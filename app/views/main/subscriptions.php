@@ -1,6 +1,6 @@
 <?php $userId = $vars['model']->getSubscriptions($_GET['id']); ?>
 <div style="text-align: center;" class="container">
-    <h2>Подписки</h2><br>
+    <h1>Подписки</h1><br>
     <div>
         <form method="POST">
             <div class="col-md-4"></div>
