@@ -76,8 +76,16 @@ if(isset($_POST['addFriend'])){
                     <div class="row">
                         <div class="sub-title">
                                 <?php $blogName = $vars['model']->getBlogName($_GET['id']);?>
-                            <h1 class="display-1"><?php echo $blogName['blog_name'] ;?></h1>
+
+                            <ul style="float: left">
+                                <h3>Основная информация:</h3><hr>
+                                <li>Страна:</li>
+                                <li>Город:</li>
+                                <li>Дата рождения:</li>
+                            </ul>
+                            <h1 class="display-2"><?php echo $blogName['blog_name'] ;?></h1>
                             <a href="/dialog"><i class="icon-envelope"></i></a>
+
                         </div>
 
                         <!-- Blog Post Start -->
@@ -112,7 +120,24 @@ if(isset($_POST['addFriend'])){
                                     <input name="<?php echo 'del'.$var['id']?>" class="btn btn-outline-light" type="submit" value="Удалить" style="float: right;">
                                 </form>
                                 <?php } ?>
-                            <?php } ?>
+
+                                <div style="float: right; " class="like" data-id="<?php echo $var['id']?>"><span class="counter"><?php echo $var['likes'] ?></span></div>
+                                <h3>Комментарии</h3>
+                                <form method="POST">
+                                    <p> <textarea type="text" class="form-control" name="comment" placeholder="Написать комментарий"></textarea></p>
+                                    <p><input type="submit" class="btn btn-primary" name="commentButton" style="float: right;" value="Отправить"></p>
+                                </form>
+
+                                <div   class="media">
+                                    <a class="pull-left" href="#">
+                                        <img style="width: 64px" class="media-object" src="../../../public/avatars/avatar_none.png">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">login</h4>
+                                        ...asdasdasdasd asdasdas
+                                    </div>
+                                </div>
+                            <?php  } ?>
                             <!--load-more-post-->
                             <div class="col-md-12 text-center">
                                 <a href="javascript:void(0)" id="load-more-post" class="load-more-button">Load</a>

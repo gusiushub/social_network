@@ -1,5 +1,6 @@
-MVC framework using a namespace
+Social network
 ================================
+**This is social network built on MVC framework using a namespace**
 
 Installation
 --------------
@@ -7,8 +8,11 @@ Installation
         `Apache 2.4`<br>
         `php5.6`<br>
 **The first step is cloning the base template
-git clone https://github.com/gusiushub/social_network.git** <br>
+
+        git clone https://github.com/gusiushub/social_network.git** <br>
             
+**Import the database**  
+
 **Upgrade packages:**  
  
             cd app/composer
