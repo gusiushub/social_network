@@ -136,7 +136,13 @@ if(isset($_POST['addFriend'])){
                                     </a>
                                     <div id="<?php echo 'comtText'.$var['id']; ?>" class="media-body">
                                         <h4 class="media-heading">login</h4>
-                                        <?php var_dump($postVar->getComment($var['id']));?>
+                                        <?php $comments = $postVar->getComment($var['id']);
+                                        for ($i=0;$i<count($comments);$i++)
+                                        {
+                                            print $comments[$i]['text'];
+                                            echo '<br>';
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             <?php  } ?>
