@@ -122,7 +122,6 @@ if(isset($_POST['addFriend'])){
                                 </form>
                                 <?php } ?>
                                 <?php $postVar->addComment($var['id']); ?>
-<!--                                <div style="float: right; " class="like" data-id="--><?php //echo $var['id']?><!--"><span class="counter">--><?php //echo $var['likes'] ?><!--</span></div>-->
                                 <div class="like" id="<?php echo 'like'.$var['id']; ?>">Like[<b  id="<?php echo 'likes'.$var['id']; ?>"><?php  echo $var['likes']; ?></b>]</div>
                                 <div id="addCommentContainer">
                                     <h3>Комментарии</h3>
@@ -140,7 +139,6 @@ if(isset($_POST['addFriend'])){
                                         ...asdasdasdasd asdasdas
                                     </div>
                                 </div>
-
                             <?php  } ?>
                             <!--load-more-post-->
                             <div class="col-md-12 text-center">

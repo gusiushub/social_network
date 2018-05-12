@@ -65,21 +65,13 @@ use app\assets\defaultAssets;
 <script type="text/javascript">
 
     $(document).ready(function() {
-        // $('.like').live('click', function() {
-        //
-        //     alert($(this).attr("id"));
-        // });
         $(".like").click(function () {
-           // var post_id = $('#post_id').val();
             var post_id = $(this).attr("id");
-            //alert(post_id);
            like($(this).attr("id"));
         });
     });
     
     function like(id) {
-        //alert(id.slice(-2));
-           // var post_id = $(this).attr("id");
         var uri = id.slice(-2);
             $.ajax({
                 url: "/like/"+uri,
@@ -88,90 +80,12 @@ use app\assets\defaultAssets;
                 dataType: "json",
                 success: function(data) {
                     if(data.result == 'success'){
-                        alert(id);
                         var count = parseInt($("#likes"+uri).html());
-                        alert(count);
                         $("#likes"+uri).html(count+1);
                     }else{
-                        // вывод сообщения об ошибке
-                      //  alert("Error");
+                       alert("Error");
                     }
                 }
             });
     }
-
-
-    // $(document).ready(function(){
-    //     /* Следующий код выполняется только после загрузки DOM */
-    //     /* Данный флаг предотвращает отправку нескольких комментариев: */
-    //     var working = false;
-    //     /* Ловим событие отправки формы: */
-    //     $('#commentButtonForm').submit(function(e){
-    //         e.preventDefault();
-    //         if(working) return false;
-    //         working = true;
-    //         $('#commentBut').val('Working..');
-    //         $('span.error').remove();
-    //         /* Отправляем поля формы в submit.php: */
-    //         $.post('/comment/',$(this).serialize(),function(msg){
-    //
-    //             working = false;
-    //             $('#commentBut').val('Submit');
-    //
-    //             if(msg.status){
-    //
-    //                 /*
-    //                 /	Если вставка была успешной, добавляем комментарий
-    //                 /	ниже последнего на странице с эффектом slideDown
-    //                 /*/
-    //
-    //                 $(msg.html).hide().insertBefore('#addCommentContainer').slideDown();
-    //                 $('#commentText').val('');
-    //             }
-    //             else {
-    //
-    //                 /*
-    //                 /	Если есть ошибки, проходим циклом по объекту
-    //                 /	msg.errors и выводим их на страницу
-    //                 /*/
-    //
-    //                 $.each(msg.errors,function(k,v){
-    //                     $('label[for='+k+']').append('<span class="error">'+v+'</span>');
-    //                 });
-    //             }
-    //         },'json');
-    //
-    //     });
-    //
-    // });
-
-</script>
-<script type="text/javascript">
-
-
-    // ставим обработчики на фазе перехвата, последний аргумент true
-    // commentButtonForm.addEventListener("focus", function() {
-    //     alert('adsasd');
-    //     //this.classList.add('focused');
-    // }, true);
-    //
-    // commentButtonForm.addEventListener("blur", function() {
-    //     //this.classList.remove('focused');
-    // }, true);
-
-        // $("#commentText").click(function () {
-        //     //alert('asdasd');
-        //     $("#commentButtonForm").show('<p><input type="submit" id="commentBut" class="btn btn-primary" name="commentButton" style="float: right;" value="Отправить"></p>');
-        // });
-
-        // $(init);
-        //
-        // function init() {
-        //     $("#commentButtonForm").bind("click", pulsate);
-        // }
-        //
-        // function pulsate() {
-        //     $(this).fadeOut();
-        //     $(this).fadeIn();
-        // }
 </script>
