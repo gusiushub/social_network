@@ -288,4 +288,9 @@ class Main extends Model
         $this->article->setLike($_GET['id']);
         echo json_encode(array('result' => 'success'));
     }
+
+    public function getComment($post_id)
+    {
+        return $this->comment->userComment($post_id);
+    }
 }

@@ -125,18 +125,18 @@ if(isset($_POST['addFriend'])){
                                 <div class="like" id="<?php echo 'like'.$var['id']; ?>">Like[<b  id="<?php echo 'likes'.$var['id']; ?>"><?php  echo $var['likes']; ?></b>]</div>
                                 <div id="addCommentContainer">
                                     <h3>Комментарии</h3>
-                                    <form id="commentButtonForm" method="POST" action="">
+                                    <form id="<?php echo 'commentButtonForm'.$var['id']; ?>" class="commentButtonForm" method="POST" action="">
                                         <p> <textarea type="text" class="form-control" id="commentText" name="commentText" placeholder="Написать комментарий"></textarea></p>
-                                        <p><input type="submit" id="commentBut" class="btn btn-primary" name="<?php echo 'commentButton_'.$var['id'] ?>" style="float: right;" value="Отправить"></p>
+                                        <p class="commentBut"><input type="submit"  id="<?php echo 'commentBut'.$var['id']; ?>" class="btn btn-primary" name="<?php echo 'commentButton_'.$var['id'] ?>" style="float: right;" value="Отправить"></p>
                                     </form>
                                 </div>
                                 <div   class="media">
                                     <a class="pull-left" href="#">
                                         <img style="width: 64px" class="media-object" src="../../../public/avatars/avatar_none.png">
                                     </a>
-                                    <div class="media-body">
+                                    <div id="<?php echo 'comtText'.$var['id']; ?>" class="media-body">
                                         <h4 class="media-heading">login</h4>
-                                        ...asdasdasdasd asdasdas
+                                        <?php var_dump($postVar->getComment($var['id']));?>
                                     </div>
                                 </div>
                             <?php  } ?>

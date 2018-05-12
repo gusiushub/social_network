@@ -16,7 +16,7 @@ return [
         'action' => 'like',
     ],
 
-    'comment' => [
+    'comment/[0-9]+' => [
         'controller' => 'main',
         'action' => 'comment',
     ],
