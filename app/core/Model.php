@@ -2,8 +2,6 @@
 
 namespace app\core;
 
-//use app\core\Db;
-
 abstract class Model
 {
     public $db;

@@ -99,4 +99,11 @@ class MainController extends Controller
         $vars = ['model' => $model];
         $this->view->render('Смена пароля', $vars);
     }
+
+    public function commentAction()
+    {
+//        $model = new Main;
+//        $model->comment();
+        var_dump('asdasdasd');
+    }
 }

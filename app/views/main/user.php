@@ -15,6 +15,7 @@ if(isset($_POST['addFriend'])){
 }
 
 ?>
+
 <div id="main">
     <div class="container">
         <div class="row">
@@ -76,18 +77,15 @@ if(isset($_POST['addFriend'])){
                     <div class="row">
                         <div class="sub-title">
                                 <?php $blogName = $vars['model']->getBlogName($_GET['id']);?>
-
                             <ul style="float: left">
                                 <h3>Основная информация:</h3><hr>
                                 <li>Страна:</li>
                                 <li>Город:</li>
                                 <li>Дата рождения:</li>
                             </ul>
-                            <h1 class="display-2"><?php echo $blogName['blog_name'] ;?></h1>
+
                             <a href="/dialog"><i class="icon-envelope"></i></a>
-
                         </div>
-
                         <!-- Blog Post Start -->
                         <?php if($_SESSION['id'] == $_GET['id']) { ?>
                         <form method="POST">
@@ -96,6 +94,7 @@ if(isset($_POST['addFriend'])){
                             <p><input type="submit" class="btn btn-primary" name="post" style="float: right;" value="Опубликовать"></p>
                         </form>
                         <?php } ?>
+                        <h1 class="display-2"><?php echo $blogName['blog_name'] ;?></h1>
                         <div class="col-md-12 content-page">
                             <?php
                             $postVar = $vars['model'];
@@ -115,19 +114,21 @@ if(isset($_POST['addFriend'])){
                                     <span><?php echo $var['date']; ?>/ by <a href="#" target="_blank"><?php echo $user['first_name'].' '.$user['last_name'] ?></a></span>
                                 </div>
                                 <p class="text-center" ><?php echo $var['content']; ?></p>
-                            <?php if($_SESSION['id'] == $_GET['id']) { ?>
+                                <?php if($_SESSION['id'] == $_GET['id']) { ?>
                                 <form method="POST">
                                     <input name="<?php echo 'del'.$var['id']?>" class="btn btn-outline-light" type="submit" value="Удалить" style="float: right;">
                                 </form>
                                 <?php } ?>
-
+                                <?php $postVar->addComment($var['id']); ?>
                                 <div style="float: right; " class="like" data-id="<?php echo $var['id']?>"><span class="counter"><?php echo $var['likes'] ?></span></div>
-                                <h3>Комментарии</h3>
-                                <form method="POST">
-                                    <p> <textarea type="text" class="form-control" name="comment" placeholder="Написать комментарий"></textarea></p>
-                                    <p><input type="submit" class="btn btn-primary" name="commentButton" style="float: right;" value="Отправить"></p>
-                                </form>
+                                <div id="addCommentContainer">
+                                    <h3>Комментарии</h3>
+                                    <form id="commentButtonForm" method="POST" action="">
+                                        <p> <textarea type="text" class="form-control" id="commentText" name="commentText" placeholder="Написать комментарий"></textarea></p>
+                                        <p><input type="submit" id="commentBut" class="btn btn-primary" name="commentButton" style="float: right;" value="Отправить"></p>
 
+                                    </form>
+                                </div>
                                 <div   class="media">
                                     <a class="pull-left" href="#">
                                         <img style="width: 64px" class="media-object" src="../../../public/avatars/avatar_none.png">

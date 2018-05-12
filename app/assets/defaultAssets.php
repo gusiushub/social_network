@@ -63,9 +63,11 @@ class defaultAssets
     static function setJs()
     {
         return array(
-            '<script type="text/javascript" src="../../template/DevBlog/js/jquery.min.js"></script>',
-            '<script type="text/javascript" src="../../template/DevBlog/js/plugin.js"></script>',
-            '<script type="text/javascript" src="../../template/DevBlog/js/scripts.js"></script>'
+            '<script src="http://code.jquery.com/jquery-1.8.3.js"></script>',
+            '<script type="text/javascript" src="../../template/default/js/jquery.min.js"></script>',
+            '<script type="text/javascript" src="../../template/default/js/plugin.js"></script>',
+            '<script type="text/javascript" src="../../template/default/js/scripts.js"></script>',
+            //'<script type="text/javascript" src="../ajax/comment.js" ></script>'
         );
     }
 }
