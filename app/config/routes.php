@@ -11,6 +11,11 @@ return [
         'action' => 'index',
     ],
 
+    'like/[0-9]+' => [
+        'controller' => 'main',
+        'action' => 'like',
+    ],
+
     'comment' => [
         'controller' => 'main',
         'action' => 'comment',

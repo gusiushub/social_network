@@ -18,7 +18,8 @@ return [
         'edit',
         'subscribers',
         'subscriptions',
-        'comment'
+        'comment',
+        'like'
     ],
 
     'guest' => [

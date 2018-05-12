@@ -51,4 +51,20 @@ class Article
         return $this->db->delete("posts", $id);
     }
 
+    public function getLike($post_id)
+    {
+        return $this->db->queryRows('SELECT likes FROM posts WHERE id=:post_id', array('post_id' => $post_id));
+    }
+
+    public function setLike($post_id)
+    {
+        $likes = $this->getLike($post_id);
+        //var_dump((int)$likes[0]['likes']);
+        $like = (int)$likes[0]['likes']+1;
+        //var_dump($like);
+        $this->db->update('posts', array('likes'=>$like),'id=:post_id', array(':post_id' => $post_id));
+        //var_dump($_GET['id']);
+
+    }
+
 }

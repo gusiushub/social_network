@@ -106,4 +106,10 @@ class MainController extends Controller
 //        $model->comment();
         var_dump('asdasdasd');
     }
+
+    public function likeAction()
+    {
+        $model = new Main;
+        $model->setLike($_GET['id']);
+    }
 }

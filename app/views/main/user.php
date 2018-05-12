@@ -99,6 +99,7 @@ if(isset($_POST['addFriend'])){
                             <?php
                             $postVar = $vars['model'];
                             $vars = $vars['model']->userPosts();
+                            //$likes = $var['model']->getLike($id);
                             foreach($vars as $var){
                                 if($_GET['id'] == $_SESSION['id']) {
                                     if (isset($_POST['del'.$var['id']])) {
@@ -107,6 +108,7 @@ if(isset($_POST['addFriend'])){
                                     }
                                 }
                                 ?>
+                                <input type="hidden" value="<?php echo $var['id'] ;?>" id="post_id">
                                 <div class="post-title">
                                     <a href="#"><h1><?php  echo $var['title'];?></h1></a>
                                 </div>
@@ -120,13 +122,13 @@ if(isset($_POST['addFriend'])){
                                 </form>
                                 <?php } ?>
                                 <?php $postVar->addComment($var['id']); ?>
-                                <div style="float: right; " class="like" data-id="<?php echo $var['id']?>"><span class="counter"><?php echo $var['likes'] ?></span></div>
+<!--                                <div style="float: right; " class="like" data-id="--><?php //echo $var['id']?><!--"><span class="counter">--><?php //echo $var['likes'] ?><!--</span></div>-->
+                                <div class="like" id="<?php echo 'like'.$var['id']; ?>">Like[<b  id="<?php echo 'likes'.$var['id']; ?>"><?php  echo $var['likes']; ?></b>]</div>
                                 <div id="addCommentContainer">
                                     <h3>Комментарии</h3>
                                     <form id="commentButtonForm" method="POST" action="">
                                         <p> <textarea type="text" class="form-control" id="commentText" name="commentText" placeholder="Написать комментарий"></textarea></p>
-                                        <p><input type="submit" id="commentBut" class="btn btn-primary" name="commentButton" style="float: right;" value="Отправить"></p>
-
+                                        <p><input type="submit" id="commentBut" class="btn btn-primary" name="<?php echo 'commentButton_'.$var['id'] ?>" style="float: right;" value="Отправить"></p>
                                     </form>
                                 </div>
                                 <div   class="media">
@@ -138,6 +140,7 @@ if(isset($_POST['addFriend'])){
                                         ...asdasdasdasd asdasdas
                                     </div>
                                 </div>
+
                             <?php  } ?>
                             <!--load-more-post-->
                             <div class="col-md-12 text-center">

@@ -3,14 +3,14 @@
 namespace app\models;
 
 use app\core\Model;
-use app\core\Db;
+//use app\core\Db;
 use app\lib\Article;
 use app\lib\Comment;
 use app\lib\Files;
 use app\lib\Form;
 use app\lib\Users;
 use app\lib\Message;
-use app\lib\Mail;
+//use app\lib\Mail;
 
 
 class Main extends Model
@@ -20,7 +20,7 @@ class Main extends Model
     private $form;
     private $article;
     private $message;
-    private $mail;
+    //private $mail;
     private $comment;
 
     public function __construct()
@@ -30,7 +30,7 @@ class Main extends Model
         $this->form    = new Form;
         $this->article = new Article;
         $this->message = new Message;
-        $this->mail    = new Mail;
+        //$this->mail    = new Mail;
         $this->comment = new Comment;
     }
 
@@ -277,4 +277,15 @@ class Main extends Model
         $this->comment->addComment($postId);
     }
 
+    public function getLike($post_id)
+    {
+         $this->article->getLike($post_id);
+       //return $likes;
+    }
+
+    public function setLike()
+    {
+        $this->article->setLike($_GET['id']);
+        echo json_encode(array('result' => 'success'));
+    }
 }

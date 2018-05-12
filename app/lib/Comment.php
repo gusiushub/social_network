@@ -16,7 +16,7 @@ class Comment
 
     public function addComment($postId)
     {
-        if (isset($_POST['commentButton'])) {
+        if (isset($_POST['commentButton_'.$postId])) {
             return $this->db->insert('comments', array('user_id'   => $_SESSION['id'],
                                                             'post_id' => $postId,
                                                             'text'    => htmlspecialchars($_POST['commentText'])));
