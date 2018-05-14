@@ -106,8 +106,7 @@ if(isset($_POST['addFriend'])){
                                         $postVar->deletePost($var['id']);
                                         View::redirect('/user/' . $_SESSION['id']);
                                     }
-                                }
-                                ?>
+                                } ?>
                                 <input type="hidden" value="<?php echo $var['id'] ;?>" id="post_id">
                                 <div class="post-title">
                                     <a href="#"><h1><?php  echo $var['title'];?></h1></a>
@@ -130,22 +129,25 @@ if(isset($_POST['addFriend'])){
                                         <p class="commentBut"><input type="submit"  id="<?php echo 'commentBut'.$var['id']; ?>" class="btn btn-primary" name="<?php echo 'commentButton_'.$var['id'] ?>" style="float: right;" value="Отправить"></p>
                                     </form>
                                 </div>
-                                <div   class="media">
-                                    <a class="pull-left" href="#">
-                                        <img style="width: 64px" class="media-object" src="../../../public/avatars/avatar_none.png">
-                                    </a>
-                                    <div id="<?php echo 'comtText'.$var['id']; ?>" class="media-body">
-                                        <h4 class="media-heading">login</h4>
-                                        <?php $comments = $postVar->getComment($var['id']);
+
+                                    <?php $comments = $postVar->getComment($var['id']);
                                         for ($i=0;$i<count($comments);$i++)
-                                        {
-                                            print $comments[$i]['text'];
-                                            echo '<br>';
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                            <?php  } ?>
+                                        { ?>
+                                        <div class="media">
+                                            <img style="width: 64px" class="mr-3" src="<?php echo '../../../public/avatars/'.$user['avatar']?>">
+                                            <div id="<?php echo 'comtText'.$var['id']; ?>" class="media-body">
+                                                <h4 class="mt-0"><?php echo $user['login']; ?></h4>
+                                                <div class="text-center">
+                                                    <?php
+                                                    $userId = (int)$comments[$i]['user_id'];
+                                                    $user = $postVar->userId($userId); ?>
+                                                    <?php
+                                                    print $comments[$i]['text']; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <?php } ?>
+                            <?php } ?>
                             <!--load-more-post-->
                             <div class="col-md-12 text-center">
                                 <a href="javascript:void(0)" id="load-more-post" class="load-more-button">Load</a>
