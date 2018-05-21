@@ -5,9 +5,10 @@ Social network
 Installation
 --------------
 **RECOMMENDED SETTINGS**
-        `Apache 2.4`<br>
-        `php5.6`<br>
-**The first step is cloning the base template
+
+        Apache 2.4
+        php5.6
+**The first step is cloning the base template**
 
         git clone https://github.com/gusiushub/social_network.git** <br>
             

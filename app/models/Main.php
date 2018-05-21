@@ -3,14 +3,12 @@
 namespace app\models;
 
 use app\core\Model;
-//use app\core\Db;
 use app\lib\Article;
 use app\lib\Comment;
 use app\lib\Files;
 use app\lib\Form;
 use app\lib\Users;
 use app\lib\Message;
-//use app\lib\Mail;
 
 
 class Main extends Model
@@ -280,7 +278,6 @@ class Main extends Model
     public function getLike($post_id)
     {
          $this->article->getLike($post_id);
-       //return $likes;
     }
 
     public function setLike()
@@ -292,5 +289,10 @@ class Main extends Model
     public function getComment($post_id)
     {
         return $this->comment->userComment($post_id);
+    }
+
+    public function find($query)
+    {
+
     }
 }

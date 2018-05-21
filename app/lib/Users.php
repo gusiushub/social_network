@@ -7,8 +7,7 @@ namespace app\lib;
 
 use app\core\View;
 use app\core\Db;
-//use PDO;
-use SimpleXMLElement;
+//use SimpleXMLElement;
 
 class Users
 {
@@ -214,6 +213,9 @@ class Users
         return $this->db->queryRow('SELECT blog_name FROM users WHERE id=:id', array(':id'=>$id));
     }
 
+    /**
+     * @return mixed
+     */
     public function updateBlogName()
     {
         return $this->db->update('users', array('blog_name' => htmlspecialchars($_POST['nameBlog'])), 'id=:id',

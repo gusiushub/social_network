@@ -89,41 +89,4 @@ use app\assets\defaultAssets;
         });
     }
 </script>
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        //var post = $(this).attr("id");
-        //alert(post);
-        $(".commentButtonForm").submit(function () {
-            var text = $('#commentText').val();
-            //alert(text);
-            var post_id = $(this).attr("id");
-            //var text = $("#commentText").html();
-            //alert($("#commentText").html());
-           // alert($(this).attr("id"));
-            comment($(this).attr("id"),text);
-        });
-    });
-
-    function comment(id,comment) {
-        alert(comment);
-        var uri = id.slice(-1);
-        $.ajax({
-            url: "/comment/"+uri,
-            type: "POST",
-            data: {
-                'post_id': id,
-                'text': comment
-            },
-            dataType: "json",
-            success: function(data) {
-                if(data.result == 'success'){
-                    var count = parseInt($("#comText"+uri).html());
-                    $("#comText"+uri).html(count+1);
-                }else{
-                    alert("Error");
-                }
-            }
-        });
-    }
-</script>
+<script src="../../ajax/like.js" type="text/javascript"></script>

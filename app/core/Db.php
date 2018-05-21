@@ -98,12 +98,13 @@ class Db
     }
 
     /**
-     * @param $table название таблицы
-     * @param $param id строки
+     * @param $table - название таблицы
+     * @param $where
+     * @param $param - id строки
      */
-    public function delete($table, $param)
+    public function delete($table, $where, $param)
     {
-         $this->db->exec("DELETE FROM ".$table." WHERE id=".$param);
+         $this->db->exec("DELETE FROM ".$table." WHERE ".$where."=".$param);
     }
 
     /**

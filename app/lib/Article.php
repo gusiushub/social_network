@@ -48,7 +48,8 @@ class Article
      */
     public function delPost($id)
     {
-        return $this->db->delete("posts", $id);
+        $this->db->delete("comments",'post_id', $id);
+        return $this->db->delete("posts",'id', $id);
     }
 
     public function getLike($post_id)

@@ -88,10 +88,14 @@ if(isset($_POST['addFriend'])){
                         </div>
                         <!-- Blog Post Start -->
                         <?php if($_SESSION['id'] == $_GET['id']) { ?>
+
                         <form method="POST">
                             <input type="text" class="form-control" name="title" placeholder="Заголовок">
                             <p> <textarea type="text" class="form-control" name="content" placeholder="Контент"></textarea></p>
-                            <p><input type="submit" class="btn btn-primary" name="post" style="float: right;" value="Опубликовать"></p>
+                            <p>
+                                <input type="file"  name="postFile" style="float: left">
+                                <input type="submit" class="btn btn-primary" name="post" style="float: right;" value="Опубликовать">
+                            </p>
                         </form>
                         <?php } ?>
                         <h1 class="display-2"><?php echo $blogName['blog_name'] ;?></h1>
@@ -129,24 +133,50 @@ if(isset($_POST['addFriend'])){
                                         <p class="commentBut"><input type="submit"  id="<?php echo 'commentBut'.$var['id']; ?>" class="btn btn-primary" name="<?php echo 'commentButton_'.$var['id'] ?>" style="float: right;" value="Отправить"></p>
                                     </form>
                                 </div>
-
                                     <?php $comments = $postVar->getComment($var['id']);
                                         for ($i=0;$i<count($comments);$i++)
                                         { ?>
-                                        <div class="media">
-                                            <img style="width: 64px" class="mr-3" src="<?php echo '../../../public/avatars/'.$user['avatar']?>">
-                                            <div id="<?php echo 'comtText'.$var['id']; ?>" class="media-body">
-                                                <h4 class="mt-0"><?php echo $user['login']; ?></h4>
-                                                <div class="text-center">
-                                                    <?php
-                                                    $userId = (int)$comments[$i]['user_id'];
-                                                    $user = $postVar->userId($userId); ?>
-                                                    <?php
-                                                    print $comments[$i]['text']; ?>
+                                            <div class="container">
+                                                <div class="row align-items-start">
+                                                    <div class="col-md">
+                                                        <h4 ><?php echo $user['login']; ?></h4>
+                                                    </div>
+                                                    <div class="col-md">
+                                                        <img style="width: 64px"  src="<?php echo '../../../public/avatars/'.$user['avatar']?>">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-5">
+                                                    <div id="<?php echo 'comtText'.$var['id']; ?>">
+                                                        <?php
+                                                        $userId = (int)$comments[$i]['user_id'];
+                                                        $user = $postVar->userId($userId);
+                                                        echo $comments[$i]['text']; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <?php } ?>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             <?php } ?>
                             <!--load-more-post-->
                             <div class="col-md-12 text-center">
@@ -167,3 +197,6 @@ if(isset($_POST['addFriend'])){
                         <p>© Copyright 2018. All rights reserved</p>
                     </footer>
                 </div>
+            </div>
+        </div>
+    </div>
