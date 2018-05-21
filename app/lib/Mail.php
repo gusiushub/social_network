@@ -2,7 +2,6 @@
 
 namespace app\lib;
 
-//use app\core\Db;
 
 class Mail
 {

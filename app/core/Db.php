@@ -9,7 +9,7 @@ namespace app\core;
 use http\Exception;
 use PDO;
 
-class Db
+class Db implements DbInterface
 {
     private $db;
 
@@ -27,8 +27,8 @@ class Db
     }
 
     /**
-     * @param $table название таблицы
-     * @param $fields название поля
+     * @param $table - название таблицы
+     * @param $fields - название поля
      * @param null $insertParams
      * @return null
      */

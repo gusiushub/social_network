@@ -84,7 +84,7 @@ class Users
         $_SESSION['first_name'] = $user['first_name'];
         $_SESSION['login']      = $user['login'];
         $_SESSION['active']     = 1;
-        $_SESSION['authorize'] = 1;
+        $_SESSION['authorize']  = 1;
 
     }
 
