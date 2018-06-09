@@ -9,23 +9,32 @@ namespace app\core;
 use http\Exception;
 use PDO;
 
-class Db implements DbInterface
+class Db
 {
-    private $db;
-
-    /**
-     * Db constructor.
-     */
     public function __construct()
     {
-        $config   = require '/../config/db.php';
-        $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['db_name'],
-                                                                         $config['username'],
-                                                                         $config['password']);
-        $this->db->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND,'SET NAMES utf8');
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ //       $config   = require '/../config/db.php';
+//        $db = new PDO(
+//            'mysql:host='.$config['host'].';dbname='.$config['db_name'],
+//            $config['username'],
+//            $config['password']
+//        );
+ //       $db->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND,'SET NAMES utf8');
+  //      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function connect()
+    {
+//        $config   = require '/../config/db.php';
+//        $db = new PDO(
+//            'mysql:host='.$config['host'].';dbname='.$config['db_name'],
+//            $config['username'],
+//            $config['password']
+//        );
+//        $db->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND,'SET NAMES utf8');
+//        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//        return $db;
+    }
     /**
      * @param $table - название таблицы
      * @param $fields - название поля
@@ -48,12 +57,12 @@ class Db implements DbInterface
                 }
                 $ignore = isset($insertParams['ignore']) && $insertParams['ignore']? 'IGNORE': '';
                 $sql = "INSERT ".$ignore." INTO " . $table . ' (' . $names . ') VALUES (' . $vals . ')';
-                $rs = $this->db->prepare($sql);
+                $rs = $this->connect()->prepare($sql);
                 foreach ($fields as $name => $val) {
                     $rs->bindValue(':' . $name, $val);
                 }
                 if ($rs->execute()) {
-                    $result = $this->db->lastInsertId(null);
+                    $result = $this->connect()->lastInsertId(null);
                 }
                 return $result;
         } catch(Exception $e) {
@@ -86,7 +95,7 @@ class Db implements DbInterface
                 $params = array();
             }
             $sql .= ' WHERE ' . $where;
-            $rs = $this->db->prepare($sql);
+            $rs = $this->connect()->prepare($sql);
             foreach ($fields as $name => $val) {
                 $params[':_' . $name] = $val;
             }
@@ -104,7 +113,7 @@ class Db implements DbInterface
      */
     public function delete($table, $where, $param)
     {
-         $this->db->exec("DELETE FROM ".$table." WHERE ".$where."=".$param);
+        $this->connect()->exec("DELETE FROM ".$table." WHERE ".$where."=".$param);
     }
 
     /**
@@ -116,7 +125,7 @@ class Db implements DbInterface
     {
         try {
             $result = null;
-            $stmt = $this->db->prepare($query);
+            $stmt = $this->connect()->prepare($query);
             if ($stmt->execute($params)) {
                 $result = $stmt->fetchColumn();
                 $stmt->closeCursor();
@@ -136,7 +145,7 @@ class Db implements DbInterface
     {
         try {
             $result = null;
-            $stmt = $this->db->prepare($query);
+            $stmt = $this->connect()->prepare($query);
             if ($stmt->execute($params)) {
                 $result = array();
                 while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
@@ -187,7 +196,7 @@ class Db implements DbInterface
     {
         try {
             $result = null;
-            $stmt   = $this->db->prepare($query);
+            $stmt = $this->connect()->prepare($query);
             if($classname) {
                 $stmt->setFetchMode($fetchStyle, $classname);
             } else {
@@ -209,7 +218,7 @@ class Db implements DbInterface
      */
     public function quote($str)
     {
-        return $this->db->quote($str);
+        return $this->connect()->quote($str);
     }
 
     /**
@@ -220,7 +229,7 @@ class Db implements DbInterface
 {
     $result = array();
     foreach ($arr as $val) {
-    $result[] = $this->db->quote($val);
+    $result[] = $this->connect()->quote($val);
     }
     return $result;
 }
@@ -244,7 +253,7 @@ class Db implements DbInterface
     {
         try {
             $result = null;
-            $stmt = $this->db->prepare($query);
+            $stmt = $this->connect()->prepare($query);
             return $stmt->execute($params);
         } catch(Exception $e) {
             $this->report($e);

@@ -34,6 +34,8 @@ $usersId = $vars['model']->getSubscriptions($_SESSION['id']);
                         <?php
                         $vars['model']->sendMessage();//echo '<br>';
                         if(isset($_POST['sms'])){
+//                            $mes = json_decode($_REQUEST["param"]);
+//                            var_dump($mes);die;
                             $_SESSION['msg'] = $_POST['message'];
                            View::redirect('/dialog/'.$_GET['id']);
                         } ?>

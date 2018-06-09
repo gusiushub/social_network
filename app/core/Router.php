@@ -10,12 +10,15 @@
 namespace app\core;
 
 use app\core\View;
+use app\core\Db;
+use PDO;
 
 
 class Router {
 
     protected $routes = [];
     protected $params = [];
+    //public $db = [];
 
     /**
      * Router constructor.
@@ -26,6 +29,22 @@ class Router {
             $this->add($key, $val);
         }
         $_GET['id'] = $this->getId();
+
+    }
+
+    public function connect()
+    {
+
+        $config   = require '/../config/db.php';
+        $db = new PDO(
+            'mysql:host='.$config['host'].';dbname='.$config['db_name'],
+            $config['username'],
+            $config['password']
+        );
+        var_dump($db);
+        $db->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND,'SET NAMES utf8');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $db;
     }
 
     public function getId()
@@ -66,6 +85,9 @@ class Router {
      * */
     public function run()
     {
+        //$this->db = new Db();;
+        //$db = new Db($connectDb);
+        //$db = $this->connect();
         if ($this->math()) {
             $path = 'app\controllers\\'.ucfirst($this->params['controller']).'Controller';
             if (class_exists($path)) {

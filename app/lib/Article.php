@@ -17,7 +17,7 @@ class Article
      */
     public function __construct()
     {
-        $this->db = new Db;
+        //$this->db = new Db;
     }
 
     /**
@@ -45,6 +45,7 @@ class Article
 
     /**
      * @param $id
+     * @return mixed|void
      */
     public function delPost($id)
     {
@@ -60,12 +61,8 @@ class Article
     public function setLike($post_id)
     {
         $likes = $this->getLike($post_id);
-        //var_dump((int)$likes[0]['likes']);
         $like = (int)$likes[0]['likes']+1;
-        //var_dump($like);
         $this->db->update('posts', array('likes'=>$like),'id=:post_id', array(':post_id' => $post_id));
-        //var_dump($_GET['id']);
-
     }
 
 }

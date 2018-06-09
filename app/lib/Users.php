@@ -5,19 +5,21 @@
 
 namespace app\lib;
 
+use app\core\Model;
 use app\core\View;
 use app\core\Db;
-//use SimpleXMLElement;
 
-class Users
+
+class Users extends Model
 {
-    private $db;
+    //private $db;
     private $form;
 
     public function __construct()
     {
-        $this->db   = new Db;
-        $this->form = new Form;
+        //$this->db   = new Db();
+        //$this->form = new Form;
+        $this->
     }
 
     /**
@@ -26,7 +28,7 @@ class Users
      */
     public function userId($id)
     {
-        return $this->db->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $id));
+        return $this->queryRow('SELECT * FROM users WHERE id=:id', array(':id' => $id));
     }
 
     /**
@@ -34,7 +36,7 @@ class Users
      */
     public function getAllUsers()
     {
-        return $this->db->queryRows("SELECT * FROM users ");
+        return $this->queryRows("SELECT * FROM users ");
     }
 
     /**
@@ -45,7 +47,7 @@ class Users
     {
         if ($this->checkRegisterForm()) {
             View::redirect('/');
-            $this->db->insert('users', array(
+            $this->insert('users', array(
                                                     'first_name' => $_POST['first_name'],
                                                     'last_name'  => $_POST['last_name'],
                                                     'email'      => $_POST['E-mail'],
@@ -71,7 +73,7 @@ class Users
      */
     public function select($id)
     {
-        return $this->db->queryRows('SELECT first_name FROM users WHERE id ='.$id);
+        return $this->queryRows('SELECT first_name FROM users WHERE id ='.$id);
     }
 
     /**
@@ -93,7 +95,7 @@ class Users
      */
     public function login()
     {
-        $user = $this->db->queryRow('SELECT * FROM users WHERE login = :login',
+        $this->queryRow('SELECT * FROM users WHERE login = :login',
                                     array(':login' => htmlspecialchars($_POST['login'])));
         if(!empty($user)){
             if($user['password'] == null and $user['password']==''){
@@ -124,7 +126,7 @@ class Users
 
     protected function activeStatus()
     {
-        $this->db->update('users', array('active' => $_SESSION['active']),
+        $this->update('users', array('active' => $_SESSION['active']),
                          'id=:id', array(':id'    => $_SESSION['id']));
     }
 
@@ -133,7 +135,7 @@ class Users
      */
     public function addFriend()
     {
-        return $this->db->insert('friends', array('user_id'   => $_SESSION['id'],
+        return $this->insert('friends', array('user_id'   => $_SESSION['id'],
                                                        'friend_id' => $_GET['id']));
     }
 
@@ -142,7 +144,7 @@ class Users
      */
     public function getFriends()
     {
-        return $this->db->queryRows('SELECT * FROM friends WHERE user_id='.htmlspecialchars($_GET['id']));
+        return $this->queryRows('SELECT * FROM friends WHERE user_id='.htmlspecialchars($_GET['id']));
     }
 
     /**
@@ -150,7 +152,7 @@ class Users
      */
     public function findFriend()
     {
-        return $this->db->queryRow('SELECT friend_id FROM friends WHERE friend_id='.$_GET['id'].' AND user_id='.$_SESSION['id']);
+        return $this->queryRow('SELECT friend_id FROM friends WHERE friend_id='.$_GET['id'].' AND user_id='.$_SESSION['id']);
     }
 
     /**
@@ -158,7 +160,7 @@ class Users
      */
     public function getActiveStatus()
     {
-        $status = $this->db->queryRow('SELECT active FROM users WHERE id=:id', array(':id' => $_GET['id']));
+        $status = $this->queryRow('SELECT active FROM users WHERE id=:id', array(':id' => $_GET['id']));
         return $status['active'];
     }
 
@@ -175,7 +177,7 @@ class Users
      */
     public function getSubscribers()
     {
-        return $this->db->queryRows('SELECT * FROM friends WHERE friend_id='.$_GET['id']);
+        return $this->queryRows('SELECT * FROM friends WHERE friend_id='.$_GET['id']);
     }
 
     /**
@@ -184,20 +186,22 @@ class Users
      */
     public function getSubscriptions($id)
     {
-        return $this->db->queryRows('SELECT * FROM friends WHERE user_id='.$id);
+        return $this->queryRows('SELECT * FROM friends WHERE user_id='.$id);
     }
 
     /**
+     * подписчика по id
      * @param $id
-     * @return подписчика по id
+     * @return mixed
      */
     public function Subscribers($id)
     {
-        return $this->db->queryRow("SELECT * FROM users WHERE id='".$id."'");
+        return $this->queryRow("SELECT * FROM users WHERE id='".$id."'");
     }
 
     /**
-     * @return int кол-во подписчиков
+     * кол-во подписчиков
+     * @return int
      */
     public function countSubscribers()
     {
@@ -205,12 +209,13 @@ class Users
     }
 
     /**
+     * название блога
      * @param $id
-     * @return название блога
+     * @return string
      */
     public function getBlogName($id)
     {
-        return $this->db->queryRow('SELECT blog_name FROM users WHERE id=:id', array(':id'=>$id));
+        return $this->queryRow('SELECT blog_name FROM users WHERE id=:id', array(':id'=>$id));
     }
 
     /**
@@ -218,7 +223,7 @@ class Users
      */
     public function updateBlogName()
     {
-        return $this->db->update('users', array('blog_name' => htmlspecialchars($_POST['nameBlog'])), 'id=:id',
+        return $this->update('users', array('blog_name' => htmlspecialchars($_POST['nameBlog'])), 'id=:id',
                                                                         array(':id' => $_SESSION['id']));
     }
 

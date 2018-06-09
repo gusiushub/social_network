@@ -8,13 +8,13 @@ namespace app\lib;
 
 use app\core\Db;
 
-class Files
+class Files extends Db
 {
-    private $db;
+    public $db;
 
     public function __construct()
     {
-        $this->db = new Db;
+        //$this->db = new Db;
     }
 
     /**
@@ -54,6 +54,7 @@ class Files
     }
 
     /**
+     * обновить путь изображения
      * @param $filename
      * @return mixed
      */

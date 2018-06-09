@@ -50,9 +50,12 @@ class Mail
     /* Метод отправки письма */
     public function send($to, $subject, $message)
     {
-        $from = "=?utf-8?B?".base64_encode($this->from_name)."?="." <".$this->from.">"; // Кодируем обратный адрес (во избежание проблем с кодировкой)
-        $headers = "From: ".$from."\r\nReply-To: ".$from."\r\nContent-type: ".$this->type."; charset=".$this->encoding."\r\n"; // Устанавливаем необходимые заголовки письма
-        if ($this->notify) $headers .= "Disposition-Notification-To: ".$this->from."\r\n"; // Добавляем запрос подтверждения получения письма, если требуется
+        // Кодируем обратный адрес (во избежание проблем с кодировкой)
+        $from = "=?utf-8?B?".base64_encode($this->from_name)."?="." <".$this->from.">";
+        // Устанавливаем необходимые заголовки письма
+        $headers = "From: ".$from."\r\nReply-To: ".$from."\r\nContent-type: ".$this->type."; charset=".$this->encoding."\r\n";
+        // Добавляем запрос подтверждения получения письма, если требуется
+        if ($this->notify) $headers .= "Disposition-Notification-To: ".$this->from."\r\n";
         $subject = "=?utf-8?B?".base64_encode($subject)."?="; // Кодируем тему (во избежание проблем с кодировкой)
         return mail($to, $subject, $message, $headers); // Отправляем письмо и возвращаем результат
     }

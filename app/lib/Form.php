@@ -11,7 +11,7 @@ class Form
 
     public function __construct($row = null)
     {
-        $this->db = new Db;
+        //$this->db = new Db;
         $this->data = $row;
     }
 
@@ -117,7 +117,6 @@ class Form
 
         // Использование фильтров с пользовательской
         // функцией обратного вызова:
-
         if(!($data['body'] =
             filter_input(INPUT_POST,'body',FILTER_CALLBACK,
                 array('options'=>'Comment::validate_text'))))
@@ -139,7 +138,6 @@ class Form
             $arr = $errors;
             return false;
         }
-
 
         foreach($data as $k=>$v){
             $arr[$k] = mysql_real_escape_string($v);
